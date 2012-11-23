@@ -1,12 +1,27 @@
 <%= simple_form_for @contribution, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :contributor_id %>
-  <%= f.input :date %>
-  <%= f.input :payment_type %>
-  <%= f.input :reference %>
+
+  <%= f.input :contributor_id, required: true do %>
+    <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus" />
+    <input type="hidden" class="required" id="contribution_contributor_id" name="contribution[contributor_id]" />
+  <% end %>
+
+  <script type="text/javascript">
+    var contributors = <%= Contributor.all.map { |c| { id: c.id, name: c.full_name } }.to_json.html_safe %>;
+    $('#contributor-name').typeahead({
+      source: contributors,
+      itemSelected: function(item, val, text) {
+        $('#contribution_contributor_id').val(parseInt(val, 10));
+      }
+    });
+  </script>
+
+  <%= f.input :date_string, label: 'Date', input_html: { class: 'datepicker' } %>
   <%= f.input :amount %>
-  <div class="form-actions">
-    <%= f.button :submit, :class => 'btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                contributions_path, :class => 'btn' %>
+  <%= f.input :payment_type, label: 'Payment Type', collection: [ 'Check', 'Cash', 'Other' ], selected: 'Check' %>
+  <%= f.input :reference %>
+  <div class="buttons">
+    <%= f.button :submit, 'Save', :class => 'btn' %>
+    <%= link_to 'Cancel', contributions_path, :class => 'btn' %>
   </div>
+
 <% end %>
