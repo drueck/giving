@@ -16,3 +16,6 @@
 
 # Ignore actual database config (only commit example)
 config/database.yml
+
+# Ignore temp files
+*.swp
