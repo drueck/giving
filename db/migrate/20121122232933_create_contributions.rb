@@ -3,7 +3,7 @@ class CreateContributions < ActiveRecord::Migration
     create_table :contributions do |t|
       t.integer :contributor_id, null: false
       t.date :date, null: false
-      t.string :type
+      t.string :payment_type
       t.string :reference
       t.decimal :amount, precision: 8, scale: 2, null: false, default: 0.0
 

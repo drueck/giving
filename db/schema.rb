@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20121122232933) do
   create_table "contributions", :force => true do |t|
     t.integer  "contributor_id",                                                :null => false
     t.date     "date",                                                          :null => false
-    t.string   "type"
+    t.string   "payment_type"
     t.string   "reference"
     t.decimal  "amount",         :precision => 8, :scale => 2, :default => 0.0, :null => false
     t.datetime "created_at",                                                    :null => false
