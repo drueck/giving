@@ -1,7 +1,9 @@
 class ContributionsController < ApplicationController
 
   def index
-    @contributions = Contribution.all
+    @contributions = Contribution.scoped\
+      .order('date desc')\
+      .paginate(page: params[:page], per_page: 10)
   end
 
   def show

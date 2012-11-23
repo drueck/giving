@@ -1,7 +1,9 @@
 class ContributorsController < ApplicationController
 
   def index
-    @contributors = Contributor.all
+    @contributors = Contributor.scoped\
+      .order('last_name, first_name')\
+      .paginate(page: params[:page], per_page: 10)
   end
 
   def show

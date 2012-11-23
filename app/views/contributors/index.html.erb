@@ -40,7 +40,5 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_contributor_path,
-            :class => 'btn btn-primary' %>
+<%= will_paginate @contributors %>
+<%= link_to 'New Contributor', new_contributor_path, :class => 'btn' %>
