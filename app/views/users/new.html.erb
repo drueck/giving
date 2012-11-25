@@ -1,8 +1,9 @@
 <h1>Add User</h1>
-<%= simple_form_for @user do |f| %>
-  <%= f.input :username %>
+<%= simple_form_for @user, html: { class: 'form-horizontal' } do |f| %>
+  <%= f.input :username, input_html: { autofocus: 'autofocus' } %>
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
   <%= f.input :user_type, collection: User.user_types, selected: User.default_user_type %>
   <%= f.submit :class => 'btn' %>
+  <%= link_to 'Cancel', users_path, class: 'btn' %>
 <% end %>
