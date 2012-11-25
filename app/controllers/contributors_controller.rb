@@ -1,5 +1,7 @@
 class ContributorsController < ApplicationController
 
+  before_filter :require_login
+
   def index
     @contributors = Contributor.scoped\
       .order('last_name, first_name')\
