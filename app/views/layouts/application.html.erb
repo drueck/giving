@@ -15,10 +15,23 @@
           <li><%= link_to 'Contributors', contributors_path %></li>
           <li><%= link_to 'Contributions', contributions_path %></li>
         </ul>
+        <ul class="nav pull-right">
+          <% if current_user %>
+            <li><%= link_to 'Logout', logout_path %></li>
+          <% else %>
+            <li><%= link_to 'Login', login_path %></li>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>
   <div id="main" class="container">
+    <% flash.each do |name, msg| %>
+      <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+        <a class="close" data-dismiss="alert">x</a>
+        <%= msg %>
+      </div>
+    <% end %>
     <%= yield %>
   </div>
 </body>
