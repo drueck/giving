@@ -1,12 +1,6 @@
-<h1>Log in</h1>
-<%= form_tag sessions_path do %>
-  <div class="field">
-    <%= label_tag :username %>
-    <%= text_field_tag :username, params[:username] %>
-  </div>
-  <div class="field">
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-  </div>
-  <div class="actions"><%= submit_tag "Log in" %></div>
+<h1>Log In</h1>
+<%= simple_form_for :session, url: sessions_path do |f| %>
+  <%= f.input :username, input_html: { autofocus: 'autofocus' } %>
+  <%= f.input :password %>
+  <%= f.submit "Log In", class: "btn" %>
 <% end %>
