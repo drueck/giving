@@ -1,8 +1,10 @@
 <%= simple_form_for @contribution, :html => { :class => 'form-horizontal' } do |f| %>
 
   <%= f.input :contributor_id, required: true do %>
-    <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus" />
-    <input type="hidden" class="required" id="contribution_contributor_id" name="contribution[contributor_id]" />
+    <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus"
+      value="<%= (@contribution.contributor ? @contribution.contributor.full_name : '') %>" />
+    <input type="hidden" class="required" id="contribution_contributor_id" name="contribution[contributor_id]"
+      value="<%= (@contribution.contributor ? @contribution.contributor.id : '') %>" />
   <% end %>
 
   <script type="text/javascript">
