@@ -1,0 +1,8 @@
+<h1>Add User</h1>
+<%= simple_form_for @user do |f| %>
+  <%= f.input :username %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  <%= f.input :user_type, collection: User.user_types, selected: User.default_user_type %>
+  <%= f.submit :class => 'btn' %>
+<% end %>
