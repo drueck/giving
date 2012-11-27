@@ -1,0 +1,25 @@
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Edit</th>
+      <th>Contributor</th>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Reference</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @contributions.each do |contribution| %>
+      <tr>
+        <td><%= link_to 'Edit', edit_contribution_path(contribution) %></td>
+        <td><%= contribution.contributor.display_name %></td>
+        <td><%= contribution.date %></td>
+        <td><%= contribution.payment_type %></td>
+        <td><%= contribution.reference %></td>
+        <td><%= number_to_currency(contribution.amount) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @contributions %>
