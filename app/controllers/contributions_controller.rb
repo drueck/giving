@@ -4,8 +4,13 @@ class ContributionsController < ApplicationController
 
   def index
     @contributions = Contribution.scoped\
-      .order('date desc')\
+      .order('date desc, id desc')\
       .paginate(page: params[:page], per_page: 10)
+    @contribution = Contribution.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -19,9 +24,20 @@ class ContributionsController < ApplicationController
   def create
     @contribution = Contribution.new(params[:contribution])
     if @contribution.save
-      redirect_to contributions_url, notice: 'Contribution saved'
+      respond_to do |format|
+        format.html { redirect_to contributions_url, notice: 'Contribution saved' }
+        format.js do
+          @contributions = Contribution.scoped\
+            .order('date desc, id desc')\
+            .paginate(page: 1, per_page: 10)
+          @contribution = Contribution.new
+        end
+      end
     else
-      render action: "new"
+      respond_to do |format|
+        format.html { render action: 'new' }
+        format.js { render 'refresh_form' }
+      end
     end
   end
 
