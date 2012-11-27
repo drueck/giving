@@ -6,6 +6,10 @@ class ContributorsController < ApplicationController
     @contributors = Contributor.scoped\
       .order('last_name, first_name')\
       .paginate(page: params[:page], per_page: 10)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show

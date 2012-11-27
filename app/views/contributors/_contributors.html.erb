@@ -1,0 +1,23 @@
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @contributors.each do |contributor| %>
+      <tr>
+        <td><%= link_to contributor.display_name, edit_contributor_path(contributor) %></td>
+        <td><%= contributor.address %></td>
+        <td><%= contributor.city %></td>
+        <td><%= contributor.state %></td>
+        <td><%= contributor.zip %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @contributors %>

@@ -1,0 +1,17 @@
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.username, edit_user_path(user) %></td>
+        <td><%= user.user_type %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @users %>
