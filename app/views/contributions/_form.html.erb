@@ -24,6 +24,10 @@
   <div class="buttons">
     <%= f.button :submit, 'Save', :class => 'btn' %>
     <%= link_to 'Cancel', contributions_path, :class => 'btn' %>
+    <%= link_to 'Delete', contribution_path(@contribution),
+      method: :delete,
+      data: { confirm: 'Are you sure?' },
+      class: 'btn' %>
   </div>
 
 <% end %>
