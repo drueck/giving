@@ -31,6 +31,13 @@ class ContributorsController < ApplicationController
 
   def edit
     @contributor = Contributor.find(params[:id])
+    @contributions = @contributor.contributions\
+      .order('date desc, id desc')\
+      .paginate(page: params[:page], per_page: 10)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def update
