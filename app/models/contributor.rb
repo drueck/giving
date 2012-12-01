@@ -1,6 +1,6 @@
 class Contributor < ActiveRecord::Base
 
-  attr_accessible :address, :city, :first_name, :last_name, :state, :zip
+  attr_accessible :address, :city, :first_name, :last_name, :state, :zip, :household_name
 
   has_many :contributions, dependent: :destroy
 
