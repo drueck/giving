@@ -1,6 +1,7 @@
 <%= simple_form_for @contributor, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :first_name, input_html: { autofocus: 'autofocus' } %>
   <%= f.input :last_name %>
+  <%= f.input :household_name, input_html: { placeholder: 'Leave blank for default' } %>
   <%= f.input :address %>
   <%= f.input :city %>
   <%= f.input :state %>
