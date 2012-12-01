@@ -6,6 +6,9 @@ class Contributor < ActiveRecord::Base
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :household_name, presence: true
+
+  before_validation :generate_household_name_if_needed
 
   def display_name
     last_name + ', ' + first_name
@@ -13,6 +16,12 @@ class Contributor < ActiveRecord::Base
 
   def full_name
     first_name + ' ' + last_name
+  end
+
+  def generate_household_name_if_needed
+    if(first_name.present? && last_name.present? && household_name.blank?)
+      self.household_name = first_name + ' ' + last_name
+    end
   end
 
 end
