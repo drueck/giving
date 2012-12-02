@@ -7,3 +7,6 @@ jQuery ->
     format: 'mm/dd/yyyy',
 		todayHighlight: true
   )
+  setTimeout ->
+    $(".alert").fadeOut(500)
+  , 2000
