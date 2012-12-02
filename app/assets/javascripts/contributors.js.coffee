@@ -3,10 +3,14 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
 
-  $('#contributors .pagination a').live 'click', ->
-    $.getScript(this.href)
-    return false
+	$('#contributors .pagination a').live 'click', ->
+		$.getScript(this.href)
+		return false
 
 	$('#contributor-contributions .pagination a').live 'click', ->
 		$.getScript(this.href)
-		return false;
+		return false
+
+	$('#contributor-search').submit ->
+		$.get(this.action, $(this).serialize(), null, 'script')
+		return false

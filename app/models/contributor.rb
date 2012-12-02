@@ -24,4 +24,12 @@ class Contributor < ActiveRecord::Base
     end
   end
 
+  def self.names_search(query)
+    if query.present?
+      where("first_name @@ :q or last_name @@ :q or household_name @@ :q", q: query)
+    else
+      scoped
+    end
+  end
+
 end
