@@ -1,0 +1,39 @@
+<%= simple_form_for @contribution, remote: true do |f| %>
+  <div class="row">
+    <%= f.input :status, as: :hidden %>
+    <div class="span2"> 
+      <%= f.input :contributor_id, required: true do %>
+        <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus" class="span2"
+          value="<%= (@contribution.contributor ? @contribution.contributor.full_name : '') %>" />
+        <input type="hidden" class="required" id="contribution_contributor_id" name="pending_contribution[contributor_id]"
+          value="<%= (@contribution.contributor ? @contribution.contributor.id : '') %>" />
+      <% end %>
+      <script type="text/javascript">
+        var contributors = <%= Contributor.all.map { |c| { id: c.id, name: c.full_name } }.to_json.html_safe %>;
+        $('#contributor-name').typeahead({
+          source: contributors,
+          itemSelected: function(item, val, text) {
+            $('#contribution_contributor_id').val(parseInt(val, 10));
+          }
+        });
+      </script>
+    </div>
+    <div class="span2">
+      <%= f.input :date_string, label: 'Date', input_html: { class: 'datepicker span2' } %>
+    </div>
+    <div class="span2">
+      <%= f.input :amount, input_html: { class: 'span2' } %>
+    </div>
+    <div class="span2">
+      <%= f.input :payment_type, label: 'Payment Type', 
+        collection: [ 'Check', 'Cash', 'Other' ], selected: 'Check', input_html: { class: 'span2' } %>
+    </div>
+    <div class="span2">
+      <%= f.input :reference, input_html: { class: 'span2' } %>
+    </div>
+    <div class="span2">
+      <label>&nbsp;</label>
+      <%= f.button :submit, 'Add', :class => 'span2' %>
+    </div>
+  </div>
+<% end %>

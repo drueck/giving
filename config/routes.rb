@@ -2,7 +2,8 @@ Giving::Application.routes.draw do
 
   root to: 'home#index'
   resources :contributors
-  resources :contributions
+  resources :posted_contributions
+  resources :pending_contributions
   resources :users
   resources :sessions
 

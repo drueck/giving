@@ -1,10 +1,11 @@
 <%= simple_form_for @contribution, remote: true do |f| %>
   <div class="row">
+    <%= f.input :status, as: :hidden %>
     <div class="span2"> 
       <%= f.input :contributor_id, required: true do %>
         <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus" class="span2"
           value="<%= (@contribution.contributor ? @contribution.contributor.full_name : '') %>" />
-        <input type="hidden" class="required" id="contribution_contributor_id" name="contribution[contributor_id]"
+        <input type="hidden" class="required" id="contribution_contributor_id" name="posted_contribution[contributor_id]"
           value="<%= (@contribution.contributor ? @contribution.contributor.id : '') %>" />
       <% end %>
       <script type="text/javascript">

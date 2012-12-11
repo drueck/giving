@@ -11,7 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201042247) do
+ActiveRecord::Schema.define(:version => 20121207071218) do
+
+  create_table "batches", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "contributions", :force => true do |t|
     t.integer  "contributor_id",                                                :null => false
@@ -21,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20121201042247) do
     t.decimal  "amount",         :precision => 8, :scale => 2, :default => 0.0, :null => false
     t.datetime "created_at",                                                    :null => false
     t.datetime "updated_at",                                                    :null => false
+    t.integer  "batch_id"
+    t.string   "status"
   end
 
   create_table "contributors", :force => true do |t|

@@ -1,8 +1,9 @@
 class Contribution < ActiveRecord::Base
 
-  attr_accessible :amount, :date_string, :contributor_id, :reference, :payment_type
+  attr_accessible :amount, :date_string, :contributor_id, :reference, :payment_type, :status
 
   belongs_to :contributor
+  belongs_to :batch
 
   attr_writer :date_string
 
@@ -44,11 +45,11 @@ class Contribution < ActiveRecord::Base
   def date_to_string(d)
     (d.nil? ? nil : d.strftime("%m/%d/%Y"))
   end
-  private :date_to_string
+  protected :date_to_string
 
   def string_to_date(s)
     Chronic.parse(s)
   end
-  private :string_to_date
+  protected :string_to_date
 
 end

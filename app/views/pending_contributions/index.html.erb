@@ -1,0 +1,14 @@
+<div class="page-header">
+  <h1>Pending Contributions</h1>
+</div>
+<div id="contributions-inline-form">
+  <%= render 'inline_form' %>
+</div>
+<div id="contributions">
+  <%= render 'contributions' %>
+</div>
+<p class="lead">
+  Total: <span id="total-amount-pending"><%= number_to_currency(PendingContribution.total_amount_pending) %></span>
+</p>
+<%= link_to 'Deposit Report', '#', class: 'btn' %>
+<%= link_to 'Post Transactions', '#', class: 'btn' %>
