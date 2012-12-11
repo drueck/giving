@@ -1,0 +1,17 @@
+$margin: 10px;
+
+body { 
+  padding-top: 60px;
+}
+
+.buttons { 
+  margin-top: $margin * 2;
+}
+
+.thick-top-margin {
+  margin-top: $margin * 2;
+}
+
+.thick-bottom-margin {
+  margin-bottom: $margin * 2;
+}
