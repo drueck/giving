@@ -1,23 +1,25 @@
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>Contributor</th>
-      <th>Date</th>
-      <th>Type</th>
-      <th>Reference</th>
-      <th>Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @contributions.each do |contribution| %>
+<% if @contributions.length > 0 %>
+  <table class="table table-striped table-bordered">
+    <thead>
       <tr>
-        <td><%= contribution.contributor.display_name %></td>
-        <td><%= contribution.date_string %></td>
-        <td><%= contribution.payment_type %></td>
-        <td><%= contribution.reference %></td>
-        <td><%= number_to_currency(contribution.amount) %></td>
+        <th>Contributor</th>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Reference</th>
+        <th>Amount</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= will_paginate @contributions %>
+    </thead>
+    <tbody>
+      <% @contributions.each do |contribution| %>
+        <tr>
+          <td><%= contribution.contributor.display_name %></td>
+          <td><%= contribution.date_string %></td>
+          <td><%= contribution.payment_type %></td>
+          <td><%= contribution.reference %></td>
+          <td><%= number_to_currency(contribution.amount) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @contributions %>
+<% end %>
