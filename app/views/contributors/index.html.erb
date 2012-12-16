@@ -1,6 +1,4 @@
-<div class="page-header">
-  <h1>Contributors</h1>
-</div>
+<h1>Contributors</h1>
 <%= form_tag contributors_path, method: 'get', id: 'contributor-search', class: 'form-inline' do %>
   <%= text_field_tag :query, params[:query], class: 'span2', placeholder: 'Contributor Name' %>
   <%= submit_tag 'Search', name: nil, class: 'btn' %>
