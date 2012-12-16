@@ -1,5 +1,7 @@
 class Contribution < ActiveRecord::Base
 
+  include MoneyHelper
+
   attr_accessible :amount, :date_string, :contributor_id, :reference, :payment_type, :status
 
   belongs_to :contributor
@@ -13,6 +15,10 @@ class Contribution < ActiveRecord::Base
   validates :amount, presence: true, numericality: { greater_than: 0 }
   validate :check_date_string
   validate :presence_of_date
+
+  def amount=(a)
+    super(round_to_cent(a))
+  end
 
   # note: on this virtual attribute date stuff, generally just use one or the other...
   # either use the virtual attribute and it will work great, or use the real one and it
