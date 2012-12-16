@@ -2,15 +2,41 @@ class PendingContributionsController < ApplicationController
 
   before_filter :require_login
 
-  def index
+  def setup_for_index
     @contributions = PendingContribution\
       .order('date desc, id desc')\
-      .paginate(page: params[:page], per_page: 10)
+      .paginate(page: params[:page], per_page: 8)
     @contribution = PendingContribution.new
     @total_amount_pending = PendingContribution.total_amount_pending
+  end
+  protected :setup_for_index
+
+  def index
+    setup_for_index
     respond_to do |format|
       format.html
       format.js
+    end
+  end
+
+  def post
+    begin
+      PendingContribution.transaction do
+        batch = Batch.new
+        batch.posted_at = Time.now
+        batch.save!
+        PendingContribution.all.each do |contribution|
+           contribution.batch = batch
+           contribution.status = 'Posted'
+           contribution.save!
+        end
+      end
+      redirect_to batches_path
+    rescue Exception => e
+      setup_for_index
+      flash.now[:error] = 'An unexpected error occurred while attempting to post these contributions'
+      logger.error e.message
+      render 'index'
     end
   end
 
@@ -28,9 +54,7 @@ class PendingContributionsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to pending_contributions_url, notice: 'Contribution saved' }
         format.js do
-          @total_amount_pending = PendingContribution.total_amount_pending
-          @contributions = PendingContribution.order('date desc, id desc').paginate(page: 1, per_page: 10)
-          @contribution = PendingContribution.new
+          setup_for_index
         end
       end
     else
