@@ -17,8 +17,9 @@
           <li class="dropdown">
             <a id="contributions-menu-item" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Contributions <b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="contributions-menu-item">
-              <li><%= link_to 'Pending', pending_contributions_path, tabindex: -1 %></li>
-              <li><%= link_to 'Posted', posted_contributions_path, tabindex: -1 %></li>
+              <li><%= link_to 'Current Batch', pending_contributions_path, tabindex: -1 %></li>
+              <li><%= link_to 'Previous Batches', batches_path, tabindex: -1 %></li>
+              <li><%= link_to 'All Posted Contributions', posted_contributions_path, tabindex: -1 %></li>
             </ul>
           </li>
           <% if current_user_is_admin %>
@@ -44,5 +45,7 @@
     <% end %>
     <%= yield %>
   </div>
+  <footer>
+  </footer>
 </body>
 </html>
