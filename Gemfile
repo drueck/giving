@@ -43,3 +43,7 @@ gem 'simple_form'
 gem 'chronic'
 gem 'will_paginate', '~> 3.0.0'
 gem 'sorcery'
+
+# colspan does not work except in latest master
+# when 1.0.0 is released, that functionality should be included
+gem 'prawn', git: 'git://github.com/prawnpdf/prawn.git'
