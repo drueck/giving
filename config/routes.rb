@@ -2,8 +2,8 @@ Giving::Application.routes.draw do
 
   root to: 'home#index'
   resources :contributors
-  resources :posted_contributions
-  resources :pending_contributions do
+  resources :posted_contributions, path: 'posted-contributions'
+  resources :pending_contributions, path: 'pending-contributions' do
     collection do
       post 'post'
     end
