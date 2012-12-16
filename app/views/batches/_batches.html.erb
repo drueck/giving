@@ -1,17 +1,19 @@
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>Batch Posted Date</th>
-      <td>Total Contributions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @batches.each do |batch| %>
+<% if @batches.length > 0 %>
+  <table class="table table-striped table-bordered">
+    <thead>
       <tr>
-        <td><%= link_to batch.posted_at_string, batch_path(batch) %></td>
-        <td><%= number_to_currency(batch.total_contributions) %></td>
+        <th>Batch Posted Date</th>
+        <td>Total Contributions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= will_paginate @batches %>
+    </thead>
+    <tbody>
+      <% @batches.each do |batch| %>
+        <tr>
+          <td><%= link_to batch.posted_at_string, batch_path(batch) %></td>
+          <td><%= number_to_currency(batch.total_contributions) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @batches %>
+<% end %>
