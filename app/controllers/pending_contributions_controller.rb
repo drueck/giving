@@ -21,8 +21,8 @@ class PendingContributionsController < ApplicationController
 
   def post
     begin
+      batch = Batch.new
       PendingContribution.transaction do
-        batch = Batch.new
         batch.posted_at = Time.now
         batch.save!
         PendingContribution.all.each do |contribution|
@@ -31,7 +31,7 @@ class PendingContributionsController < ApplicationController
            contribution.save!
         end
       end
-      redirect_to batches_path
+      redirect_to batch_path(batch)
     rescue Exception => e
       setup_for_index
       flash.now[:error] = 'An unexpected error occurred while attempting to post these contributions'
