@@ -3,9 +3,14 @@ Giving::Application.routes.draw do
   root to: 'home#index'
   resources :contributors
   resources :posted_contributions
-  resources :pending_contributions
+  resources :pending_contributions do
+    collection do
+      post 'post'
+    end
+  end
   resources :users
   resources :sessions
+  resources :batches
 
   get 'login' => 'sessions#new', :as => 'login'
   get 'logout' => 'sessions#destroy', :as => 'logout'

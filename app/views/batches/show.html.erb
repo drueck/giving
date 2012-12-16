@@ -1,0 +1,8 @@
+<h1>Batch <%= @batch.id %> <small>Posted <%= @batch.posted_at_string %></small></h1>
+<div id="batch-contributions" class="thick-top-margin">
+  <%= render 'contributions' %>
+</div>
+<p class="total-contributions">
+  Total: <span id="total-contributions"><%= number_to_currency(@batch.total_contributions) %></span>
+</p>
+<%= link_to 'Batch Report PDF', batch_path(@batch, format: :pdf, d: 'inline'), class: 'btn' %>
