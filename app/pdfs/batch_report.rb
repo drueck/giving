@@ -9,11 +9,11 @@ class BatchReport < Prawn::Document
   def create_report
     title
     contributions
-    total
   end
 
   def title
-    text "Batch #{@batch.id}, Posted #{@batch.posted_at_string}", size: 16, align: :center, style: :bold
+    move_down inches_to_pdf_points(0.25)
+    text "Batch #{@batch.id}, Posted #{@batch.posted_at_string}", size: 14, align: :center, style: :bold
   end
 
   def contributions 
@@ -22,10 +22,20 @@ class BatchReport < Prawn::Document
     data << contributions_table_headings
     @batch.contributions.order('date, id').each do |contribution|
       data << contribution_to_array(contribution)
-    end  
-    table(data) do 
-      cells.padding_left = 10
-      cells.padding_right = 10
+    end
+    total_contributions = number_to_currency(@batch.total_contributions)
+    data << [ { content: 'Total', colspan: 4 }, total_contributions ]  
+    table(data) do |table|
+      table.cells.size = 10
+      table.cells.padding_left = 10
+      table.cells.padding_right = 10
+      table.cells.border_width = 0
+      table.column(4).align = :right
+      table.row(0).font_style = :bold
+      table.row(-1).font_style = :bold
+      table.row(-1).padding_top = 10
+      table.position = :center
+      table.width = inches_to_pdf_points(7)
     end
   end
 
@@ -45,15 +55,14 @@ class BatchReport < Prawn::Document
       number_to_currency(contribution.amount) ]
   end
 
-  def total 
-    move_down 15
-    total_contributions = number_to_currency(@batch.total_contributions)
-    text "Total: #{total_contributions}", size: 14
-  end
-
   def number_to_currency(number)
     helper = Object.new.extend(ActionView::Helpers::NumberHelper)
     helper.number_to_currency(number)
   end
+
+  def inches_to_pdf_points(inches)
+    inches * 72
+  end
+  protected :inches_to_pdf_points
 
 end
