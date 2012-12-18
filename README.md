@@ -4,9 +4,7 @@ Giving is a web application designed for churches or other non-profits
 who need a very simple way to track contributions and generate annual 
 giving statements.
 
-
 ##Adding a Batch of Contributions
-- Login to ICC Giving at icc-giving.herokuapp.com
 - Click on Current Batch from the main menu, or Contributions, Current Batch
   from the top menu. This will bring you to a list of all pending contributions,
   which should initially be empty.
