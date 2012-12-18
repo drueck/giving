@@ -18,12 +18,6 @@ class Contributor < ActiveRecord::Base
     first_name + ' ' + last_name
   end
 
-  def generate_household_name_if_needed
-    if(first_name.present? && last_name.present? && household_name.blank?)
-      self.household_name = first_name + ' ' + last_name
-    end
-  end
-
   def self.names_search(query)
     if query.present?
       where("first_name @@ :q or last_name @@ :q or household_name @@ :q", q: query)
@@ -31,5 +25,12 @@ class Contributor < ActiveRecord::Base
       scoped
     end
   end
+
+  def generate_household_name_if_needed
+    if(first_name.present? && last_name.present? && household_name.blank?)
+      self.household_name = first_name + ' ' + last_name
+    end
+  end
+  protected :generate_household_name_if_needed
 
 end

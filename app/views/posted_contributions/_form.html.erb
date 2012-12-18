@@ -8,7 +8,7 @@
   <% end %>
 
   <script type="text/javascript">
-    var contributors = <%= Contributor.all.map { |c| { id: c.id, name: c.full_name } }.to_json.html_safe %>;
+    var contributors = <%= ActiveContributor.all.map { |c| { id: c.id, name: c.full_name } }.to_json.html_safe %>;
     $('#contributor-name').typeahead({
       source: contributors,
       itemSelected: function(item, val, text) {
