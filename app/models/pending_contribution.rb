@@ -7,6 +7,7 @@ class PendingContribution < Contribution
   def set_status_to_pending
     self.status = 'Pending'
   end
+  protected :set_status_to_pending
 
   def self.total_amount_pending
     sum(:amount)
