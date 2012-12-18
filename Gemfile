@@ -22,6 +22,13 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
+group :test, :development do 
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'guard-rspec'
+  gem 'rb-inotify', '~> 0.8.8'
+end
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
