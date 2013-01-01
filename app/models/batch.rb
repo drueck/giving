@@ -1,6 +1,6 @@
 class Batch < ActiveRecord::Base
 
-  has_many :contributions
+  has_many :contributions, conditions: "status != 'Deleted'"
 
   def total_contributions
     self.contributions.reduce(0) { |sum, c| sum += c.amount }
