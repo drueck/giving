@@ -2,14 +2,6 @@ class PendingContributionsController < ApplicationController
 
   before_filter :require_login
 
-  def setup_for_index
-    @contributions = PendingContribution\
-      .order('date desc, id desc')\
-      .paginate(page: params[:page], per_page: 8)
-    @contribution = PendingContribution.new
-    @total_amount_pending = PendingContribution.total_amount_pending
-  end
-  protected :setup_for_index
 
   def index
     setup_for_index
@@ -46,6 +38,7 @@ class PendingContributionsController < ApplicationController
 
   def new
     @contribution = PendingContribution.new
+    @contribution.date = last_date
   end
 
   def create
@@ -82,6 +75,21 @@ class PendingContributionsController < ApplicationController
     @contribution = PendingContribution.find(params[:id])
     @contribution.destroy
     redirect_to pending_contributions_url
+  end
+
+  protected
+
+  def setup_for_index
+    @contributions = PendingContribution\
+      .order('date desc, id desc')\
+      .paginate(page: params[:page], per_page: 8)
+    @contribution = PendingContribution.new
+    @contribution.date = last_date
+    @total_amount_pending = PendingContribution.total_amount_pending
+  end
+
+  def last_date
+    PendingContribution.order('created_at').last.try(:date)
   end
 
 end
