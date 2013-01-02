@@ -1,5 +1,7 @@
 class Contributor < ActiveRecord::Base
 
+  include Comparable
+
   attr_accessible :address, :city, :first_name, :last_name, :state, :zip, :household_name
 
   has_many :posted_contributions, dependent: :destroy
@@ -16,6 +18,14 @@ class Contributor < ActiveRecord::Base
 
   def full_name
     first_name + ' ' + last_name
+  end
+
+  def <=>(other)
+    result = last_name <=> other.last_name
+    if result == 0
+      result = first_name <=> other.first_name
+    end
+    result
   end
 
   def self.names_search(query)

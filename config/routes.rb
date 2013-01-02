@@ -1,6 +1,7 @@
 Giving::Application.routes.draw do
 
   root to: 'home#index'
+
   resources :active_contributors, path: 'contributors'
   resources :posted_contributions, path: 'posted-contributions'
   resources :pending_contributions, path: 'pending-contributions' do
@@ -14,6 +15,9 @@ Giving::Application.routes.draw do
 
   get 'login' => 'sessions#new', :as => 'login'
   get 'logout' => 'sessions#destroy', :as => 'logout'
+
+  get 'statements' => 'statements#index', as: 'statements'
+  get 'statements/:year' => 'statements#show', as: 'statement'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

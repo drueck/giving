@@ -2,7 +2,6 @@ class PendingContributionsController < ApplicationController
 
   before_filter :require_login
 
-
   def index
     setup_for_index
     respond_to do |format|
