@@ -1,1 +1,11 @@
 <h1>Statements</h1>
+<ul class="unstyled">
+  <% if @years.length > 0 %>
+      <% (0..@years.length-1).each do |i| %>
+        <li><%= link_to "#{@years[i]} Annual Giving Statements", 
+          statement_path(@years[i], format: :pdf, d: 'inline') %></li>
+      <% end %>
+  <% else %>
+    <li>No Statements Available</li>  
+  <% end %>
+</ul>

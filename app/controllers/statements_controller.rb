@@ -2,7 +2,10 @@ class StatementsController < ApplicationController
 
   before_filter :require_login
 
-  def new
+  def index
+    first_year = PostedContribution.minimum(:date).year
+    last_year = PostedContribution.maximum(:date).year
+    @years = (first_year..last_year).to_a
   end
 
   def show
