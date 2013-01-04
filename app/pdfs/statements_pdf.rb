@@ -42,6 +42,8 @@ class StatementsPdf < Prawn::Document
       table.cells.size = 10
       table.cells.padding_left = 10
       table.cells.padding_right = 10
+      table.column(0).padding_left = 0
+      table.column(-1).padding_right = 0
       table.cells.border_width = 0
       table.column(4).align = :right
       table.row(0).font_style = :bold
