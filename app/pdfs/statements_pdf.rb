@@ -10,6 +10,10 @@ class StatementsPdf < Prawn::Document
     add_statements
   end
 
+  protected
+
+  attr_accessor :statements, :organization, :message
+
   def add_statements
     statements_count = statements.length
     return if statements_count < 1
@@ -176,10 +180,6 @@ class StatementsPdf < Prawn::Document
       contribution.reference,
       number_to_currency(contribution.amount) ]
   end
-
-  protected
-
-  attr_accessor :statements, :organization, :message
 
   def contributions_per_page
     27
