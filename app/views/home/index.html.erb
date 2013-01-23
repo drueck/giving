@@ -1,11 +1,19 @@
 <h1>Giving</h1>
+<h2>Organization</h2>
+<ul class="unstyled">
+  <li><%= link_to 'Edit Organization Information', edit_organization_path %></li>
+</ul>
+<h2>Contributors</h2>
+<ul class="unstyled">
+  <li><%= link_to 'Manage Contributors', active_contributors_path %><li>
+</ul>
 <h2>Contributions</h2>
 <ul class="unstyled">
   <li><%= link_to 'Current Batch', pending_contributions_path %></li>
   <li><%= link_to 'Previously Posted Batches', batches_path %></li>
   <li><%= link_to 'All Posted Contributions', posted_contributions_path %></li>
 </ul>
-<h2>Contributors</h2>
+<h2>Statements</h2>
 <ul class="unstyled">
-  <li><%= link_to 'Manage Contributors', active_contributors_path %><li>
+  <li><%= link_to 'Generate Statements', statements_path %></li>
 </ul>
