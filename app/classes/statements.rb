@@ -3,7 +3,8 @@ class Statements
   include Enumerable
 
   def initialize(year, options={})
-    @year = year
+    self.statement_class = options[:statement_class] || Statement
+    self.year = year
     make_statements
   end
 
@@ -13,7 +14,7 @@ class Statements
 
   protected
 
-  attr_reader :year
+  attr_accessor :year, :statement_class
 
   def make_statements
     @statements = []
@@ -23,7 +24,7 @@ class Statements
       .where('contributions.date >= :start_date and contributions.date <= :end_date and contributions.status != :deleted',
         start_date: start_date, end_date: end_date, deleted: 'Deleted').order('last_name, first_name').uniq
     contributors.each do |contributor|
-      @statements << Statement.new(contributor, start_date, end_date)
+      @statements << statement_class.new(contributor, start_date, end_date)
     end
   end
 
