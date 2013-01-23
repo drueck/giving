@@ -4,6 +4,12 @@ Giving is a web application designed for churches or other non-profits
 who need a very simple way to track contributions and generate annual 
 giving statements.
 
+##Editing Organization Information
+- Click Organization
+- Fill out the name, address and phone number for your organization
+- Click Save. This data will be used on statements, so be sure to do this when you first
+  set up the app.
+
 ##Adding a Batch of Contributions
 - Click on Current Batch from the main menu, or Contributions, Current Batch
   from the top menu. This will bring you to a list of all pending contributions,
@@ -49,3 +55,16 @@ giving statements.
 - If you need to post an individual contribution outside of a batch (though that is not
   preferred) or edit one that you recently posted and that was incorrect, you can do both
   of those things by going to Contributions, All Posted Contributions from the main menu.
+
+##Generating Annual Statments
+- Click on Statements on the top menu
+- Select the Year
+- Enter in a message to the contributor that will be displayed at bottom of each statement.
+  For example, you might want to thank them for their contributions and provide your 
+  organization's federal tax id number, etc.
+- Click Submit, which will generate a PDF of the statements for all contributors for the
+  selected year. Use the tools your browser provides to save and/or print the statements,
+  then use your browser's back button to go back to the app if desired.
+- Note: The return address and phone number on the statements is taken from the 
+  Organization information which can be accessed/edited by clicking Organization on the
+  top menu.
