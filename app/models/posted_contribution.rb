@@ -1,6 +1,6 @@
 class PostedContribution < Contribution
 
-  default_scope where('status = ?', 'Posted') 
+  default_scope where('contributions.status = ?', 'Posted') 
 
   after_initialize :set_status_to_posted
 
@@ -9,14 +9,14 @@ class PostedContribution < Contribution
     save
   end
 
+  protected
+
   def set_status_to_posted
     self.status = 'Posted'
   end
-  protected :set_status_to_posted
 
   def mark_deleted
     self.status = 'Deleted'
   end
-  protected :mark_deleted
 
 end

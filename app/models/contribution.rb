@@ -47,15 +47,14 @@ class Contribution < ActiveRecord::Base
     end
   end
 
-  # private helpers
+  protected
+
   def date_to_string(d)
     (d.nil? ? nil : d.strftime("%m/%d/%Y"))
   end
-  protected :date_to_string
 
   def string_to_date(s)
     Chronic.parse(s)
   end
-  protected :string_to_date
 
 end

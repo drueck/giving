@@ -36,11 +36,12 @@ class Contributor < ActiveRecord::Base
     end
   end
 
+  protected
+
   def generate_household_name_if_needed
     if(first_name.present? && last_name.present? && household_name.blank?)
       self.household_name = first_name + ' ' + last_name
     end
   end
-  protected :generate_household_name_if_needed
 
 end

@@ -4,13 +4,14 @@ class PendingContribution < Contribution
 
   after_initialize :set_status_to_pending
 
-  def set_status_to_pending
-    self.status = 'Pending'
-  end
-  protected :set_status_to_pending
-
   def self.total_amount_pending
     sum(:amount)
+  end
+
+  protected
+
+  def set_status_to_pending
+    self.status = 'Pending'
   end
 
 end
