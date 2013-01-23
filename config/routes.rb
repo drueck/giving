@@ -2,6 +2,8 @@ Giving::Application.routes.draw do
 
   root to: 'home#index'
 
+  resource :organization, only: [:edit, :update]
+
   resources :active_contributors, path: 'contributors'
   resources :posted_contributions, path: 'posted-contributions'
   resources :pending_contributions, path: 'pending-contributions' do
