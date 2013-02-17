@@ -2,7 +2,7 @@ class Contributor < ActiveRecord::Base
 
   include Comparable
 
-  attr_accessible :address, :city, :first_name, :last_name, :state, :zip, :household_name
+  attr_accessible :address, :city, :first_name, :last_name, :state, :zip, :household_name, :phone, :email
 
   has_many :posted_contributions, dependent: :destroy
 
