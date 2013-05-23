@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -22,7 +22,7 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
-group :test, :development do 
+group :test, :development do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'guard-rspec'
@@ -54,3 +54,5 @@ gem 'sorcery'
 # colspan does not work except in latest master
 # when 1.0.0 is released, that functionality should be included
 gem 'prawn', git: 'git://github.com/prawnpdf/prawn.git'
+
+gem 'newrelic_rpm'
