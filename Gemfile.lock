@@ -64,6 +64,9 @@ GEM
     faraday (0.8.4)
       multipart-post (~> 1.1)
     ffi (1.2.0)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     guard (1.5.4)
       listen (>= 0.4.2)
       lumberjack (>= 1.0.2)
@@ -203,6 +206,7 @@ DEPENDENCIES
   chronic
   coffee-rails (~> 3.2.1)
   factory_girl_rails
+  figaro
   guard-rspec
   jquery-rails
   less-rails
