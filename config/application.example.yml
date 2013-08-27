@@ -1,0 +1,4 @@
+# figaro config file to automatically set environment variables
+# copy this to application.yml and set the values as needed
+
+RAILS_SECRET_TOKEN: ""
