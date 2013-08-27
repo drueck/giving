@@ -22,3 +22,6 @@ config/database.yml
 
 # Ignore application configuration
 /config/application.yml
+
+# New Relic Config
+/config/newrelic.yml
