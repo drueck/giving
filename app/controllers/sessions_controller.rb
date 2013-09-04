@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
       redirect_to new_user_url
     end
   end
-  
+
   def create
     user = login(params[:session][:username], params[:session][:password])
     if user
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       render :new
     end
   end
-  
+
   def destroy
     logout
     redirect_to root_url, :notice => "Logged out"

@@ -1,5 +1,7 @@
 class BatchesController < ApplicationController
 
+	before_filter :require_login
+
   def index
     @batches = Batch.scoped.order('posted_at desc').paginate(page: params[:page], per_page: 10)
   end
@@ -15,7 +17,7 @@ class BatchesController < ApplicationController
           filename: "batch-#{@batch.id}.pdf",
           type: "application/pdf"
         }
-        if(params[:d] == 'inline') 
+        if(params[:d] == 'inline')
           options.store(:disposition, 'inline')
         end
         send_data pdf.render, options

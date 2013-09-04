@@ -1,5 +1,7 @@
 class OrganizationsController < ApplicationController
 
+	before_filter :require_login
+
   def edit
     @organization = Organization.first || Organization.create
   end
