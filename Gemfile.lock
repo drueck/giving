@@ -210,12 +210,12 @@ PLATFORMS
 
 DEPENDENCIES
   chronic
-  coffee-rails
+  coffee-rails (~> 4.0.0)
   factory_girl_rails
   figaro
   guard-rspec
   jquery-rails
-  less-rails
+  less-rails (~> 2.4.0)
   newrelic_rpm
   pg
   prawn!
@@ -223,7 +223,7 @@ DEPENDENCIES
   rb-inotify (~> 0.8.8)
   rb-readline
   rspec-rails
-  sass-rails
+  sass-rails (~> 4.0.0)
   simple_form
   sorcery
   therubyracer
