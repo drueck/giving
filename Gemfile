@@ -23,7 +23,7 @@ group :test, :development do
 end
 
 gem 'jquery-rails'
-gem 'simple_form'
+gem 'simple_form', git: 'git://github.com/plataformatec/simple_form.git'
 gem 'chronic'
 gem 'will_paginate', '~> 3.0.0'
 gem 'sorcery'

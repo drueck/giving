@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/plataformatec/simple_form.git
+  revision: f0b95cb9805ebc895947cafaf33a07b67eeb8c71
+  specs:
+    simple_form (3.0.0.rc)
+      actionpack (>= 4.0.0, < 4.1)
+      activemodel (>= 4.0.0, < 4.1)
+
+GIT
   remote: git://github.com/prawnpdf/prawn.git
   revision: f4fd13a522f1c4e8f7e853361284c6ef0ecb65b1
   specs:
@@ -164,7 +172,6 @@ GEM
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
-    simple_form (1.4.1)
     slop (3.4.6)
     sorcery (0.8.2)
       bcrypt-ruby (~> 3.0.0)
@@ -224,7 +231,7 @@ DEPENDENCIES
   rb-readline
   rspec-rails
   sass-rails (~> 4.0.0)
-  simple_form
+  simple_form!
   sorcery
   therubyracer
   thin
