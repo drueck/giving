@@ -1,7 +1,6 @@
 jQuery ->
-  $("a[rel=popover]").popover()
-  $(".tooltip").tooltip()
-  $("a[rel=tooltip]").tooltip()
+  $("a[rel~=popover], .has-popover").popover()
+  $("a[rel~=tooltip], .has-tooltip").tooltip()
   $('.datepicker').datepicker(
     autoclose: true,
     format: 'mm/dd/yyyy',
