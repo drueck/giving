@@ -3,13 +3,11 @@ class StatementsController < ApplicationController
   before_filter :require_login
 
   def new
-    first_year = PostedContribution.minimum(:date).year
-    last_year = PostedContribution.maximum(:date).year
-    @years = (first_year..last_year).to_a.reverse
+    @years = (Contribution.year_range).to_a.reverse
   end
 
   def create
-    year = params[:year] || 2012
+    year = params[:year] || Time.now.year
     message = params[:message] || ""
     statements = Statements.new(year)
     pdf = StatementsPdf.new(statements, message: message)

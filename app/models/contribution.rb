@@ -14,6 +14,13 @@ class Contribution < ActiveRecord::Base
   validate :check_date_string
   validate :presence_of_date
 
+  def self.year_range
+    this_year = Time.now.year
+    first_year = minimum(:date).try(:year) || this_year
+    last_year = maximum(:date).try(:year) || this_year
+    first_year..last_year
+  end
+
   def amount=(a)
     super(round_to_cent(a))
   end
