@@ -1,6 +1,6 @@
 class ActiveContributor < Contributor
 
-  default_scope where('status is null or status = ?', 'Active') 
+  default_scope { where('status is null or status = ?', 'Active') }
 
   after_initialize :set_status_to_active
 
