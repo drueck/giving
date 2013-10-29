@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     if @user.save
       if current_user
         redirect_to users_url
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       redirect_to users_url
     else
       render :edit
@@ -69,6 +69,13 @@ class UsersController < ApplicationController
       @user.destroy
       redirect_to users_url, notice: 'User deleted'
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:username, :password,
+      :password_confirmation, :user_type)
   end
 
 end

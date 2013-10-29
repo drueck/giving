@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
 
   authenticates_with_sorcery!
-  
-  attr_accessible :username, :password, :password_confirmation, :user_type
 
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true, on: :create

@@ -22,7 +22,7 @@ class PostedContributionsController < ApplicationController
   end
 
   def create
-    @contribution = PostedContribution.new(params[:posted_contribution])
+    @contribution = PostedContribution.new(contribution_params)
     if @contribution.save
       respond_to do |format|
         format.html { redirect_to posted_contributions_url, notice: 'Contribution saved' }
@@ -42,10 +42,10 @@ class PostedContributionsController < ApplicationController
   def edit
     @contribution = PostedContribution.find(params[:id])
   end
-  
+
   def update
     @contribution = PostedContribution.find(params[:id])
-    if @contribution.update_attributes(params[:posted_contribution])
+    if @contribution.update_attributes(contribution_params)
       redirect_to posted_contributions_url, notice: 'Contribution updated'
     else
       render action: 'edit'
@@ -56,6 +56,13 @@ class PostedContributionsController < ApplicationController
     @contribution = PostedContribution.find(params[:id])
     @contribution.destroy
     redirect_to posted_contributions_url
+  end
+
+  private
+
+  def contribution_params
+    params.require(:posted_contribution).permit(:amount, :date_string,
+      :contributor_id, :reference, :payment_type, :status)
   end
 
 end

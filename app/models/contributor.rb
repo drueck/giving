@@ -2,8 +2,6 @@ class Contributor < ActiveRecord::Base
 
   include Comparable
 
-  attr_accessible :address, :city, :first_name, :last_name, :state, :zip, :household_name, :phone, :email, :notes
-
   has_many :posted_contributions, dependent: :destroy
 
   validates :first_name, presence: true

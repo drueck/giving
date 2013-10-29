@@ -2,8 +2,6 @@ class Contribution < ActiveRecord::Base
 
   include MoneyHelper
 
-  attr_accessible :amount, :date_string, :contributor_id, :reference, :payment_type, :status
-
   belongs_to :contributor
   belongs_to :batch
 
