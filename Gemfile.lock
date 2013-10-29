@@ -58,7 +58,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
-    commonjs (0.2.7)
     daemons (1.1.9)
     diff-lcs (1.2.4)
     erubis (2.7.0)
@@ -94,11 +93,6 @@ GEM
       thor (>= 0.14, < 2.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
-    less (2.4.0)
-      commonjs (~> 0.2.7)
-    less-rails (2.4.0)
-      actionpack (>= 3.1)
-      less (~> 2.4.0)
     libv8 (3.16.14.3)
     listen (0.7.3)
     lumberjack (1.0.4)
@@ -222,7 +216,6 @@ DEPENDENCIES
   figaro
   guard-rspec
   jquery-rails
-  less-rails (~> 2.4.0)
   newrelic_rpm
   pg
   prawn!
