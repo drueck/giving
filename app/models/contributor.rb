@@ -30,7 +30,7 @@ class Contributor < ActiveRecord::Base
     if query.present?
       where("first_name @@ :q or last_name @@ :q or household_name @@ :q", q: query)
     else
-      scoped
+      all
     end
   end
 

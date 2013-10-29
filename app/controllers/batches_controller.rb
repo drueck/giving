@@ -3,7 +3,7 @@ class BatchesController < ApplicationController
 	before_filter :require_login
 
   def index
-    @batches = Batch.scoped.order('posted_at desc').paginate(page: params[:page], per_page: 10)
+    @batches = Batch.all.order('posted_at desc').paginate(page: params[:page], per_page: 10)
   end
 
   def show

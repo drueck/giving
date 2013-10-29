@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   before_filter :require_admin_or_no_admins, only: [:new]
 
   def index
-    @users = User.scoped\
-      .order('username')\
+    @users = User.all
+      .order('username')
       .paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html
