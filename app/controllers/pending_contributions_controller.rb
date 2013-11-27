@@ -79,7 +79,11 @@ class PendingContributionsController < ApplicationController
   protected
 
   def contribution_params
-    params.require(:pending_contribution).permit(:amount, :date_string,
+    if params[:pending_contribution][:date]
+      params[:pending_contribution][:date] =
+        Chronic.parse(params[:pending_contribution][:date])
+    end
+    params.require(:pending_contribution).permit(:amount, :date,
       :contributor_id, :reference, :payment_type, :status)
   end
 

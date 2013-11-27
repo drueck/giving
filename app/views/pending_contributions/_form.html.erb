@@ -17,7 +17,8 @@
     });
   </script>
 
-  <%= f.input :date_string, label: 'Date', input_html: { class: 'datepicker' } %>
+  <%= f.input :date, as: :string, label: 'Date',
+    input_html: { value: @contribution.date_string, class: 'datepicker' } %>
   <%= f.input :amount %>
   <%= f.input :payment_type, label: 'Payment Type', collection: [ 'Check', 'Cash', 'Other' ], selected: 'Check' %>
   <%= f.input :reference %>

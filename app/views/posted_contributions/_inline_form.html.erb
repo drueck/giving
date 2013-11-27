@@ -1,7 +1,7 @@
 <%= simple_form_for @contribution, remote: true do |f| %>
   <div class="row">
     <%= f.input :status, as: :hidden %>
-    <div class="span2"> 
+    <div class="span2">
       <%= f.input :contributor_id, required: true do %>
         <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus" class="span2"
           value="<%= (@contribution.contributor ? @contribution.contributor.full_name : '') %>" />
@@ -19,13 +19,14 @@
       </script>
     </div>
     <div class="span2">
-      <%= f.input :date_string, label: 'Date', input_html: { class: 'datepicker span2' } %>
+      <%= f.input :date, as: :string, label: 'Date',
+        input_html: { value: @contribution.date_string, class: 'datepicker span2' } %>
     </div>
     <div class="span2">
       <%= f.input :amount, input_html: { class: 'span2' } %>
     </div>
     <div class="span2">
-      <%= f.input :payment_type, label: 'Payment Type', 
+      <%= f.input :payment_type, label: 'Payment Type',
         collection: [ 'Check', 'Cash', 'Other' ], selected: 'Check', input_html: { class: 'span2' } %>
     </div>
     <div class="span2">

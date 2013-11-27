@@ -61,7 +61,11 @@ class PostedContributionsController < ApplicationController
   private
 
   def contribution_params
-    params.require(:posted_contribution).permit(:amount, :date_string,
+    if params[:posted_contribution][:date]
+      params[:posted_contribution][:date] =
+        Chronic.parse(params[:posted_contribution][:date])
+    end
+    params.require(:posted_contribution).permit(:amount, :date,
       :contributor_id, :reference, :payment_type, :status)
   end
 
