@@ -31,5 +31,4 @@ gem 'sorcery'
 # when 1.0.0 is released, that functionality should be included
 gem 'prawn', git: 'git://github.com/prawnpdf/prawn.git'
 gem 'figaro'
-
-gem 'newrelic_rpm'
+gem 'money-rails'

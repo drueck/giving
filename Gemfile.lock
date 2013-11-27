@@ -102,9 +102,14 @@ GEM
     method_source (0.8.2)
     mime-types (1.25)
     minitest (4.7.5)
+    money (5.1.1)
+      i18n (~> 0.6.0)
+    money-rails (0.8.1)
+      activesupport (>= 3.0)
+      money (~> 5.1.0)
+      railties (>= 3.0)
     multi_json (1.7.9)
     multipart-post (1.2.0)
-    newrelic_rpm (3.6.6.147)
     oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
@@ -216,7 +221,7 @@ DEPENDENCIES
   figaro
   guard-rspec
   jquery-rails
-  newrelic_rpm
+  money-rails
   pg
   prawn!
   rails (= 4.0.0)
