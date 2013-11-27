@@ -5,7 +5,7 @@ class PendingContribution < Contribution
   after_initialize :set_status_to_pending
 
   def self.total_amount_pending
-    sum(:amount)
+    Money.new(sum(:amount_cents))
   end
 
   protected

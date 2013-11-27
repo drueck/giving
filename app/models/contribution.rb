@@ -1,16 +1,16 @@
 class Contribution < ActiveRecord::Base
 
-  include MoneyHelper
-
   belongs_to :contributor
   belongs_to :batch
+
+  monetize :amount_cents
 
   attr_writer :date_string
 
   before_validation :save_date_string
 
   validates :contributor_id, presence: true
-  validates :amount, presence: true, numericality: { greater_than: 0 }
+  validates :amount_cents, presence: true, numericality: { greater_than: 0 }
   validate :check_date_string
   validate :presence_of_date
 
@@ -19,10 +19,6 @@ class Contribution < ActiveRecord::Base
     first_year = minimum(:date).try(:year) || this_year
     last_year = maximum(:date).try(:year) || this_year
     first_year..last_year
-  end
-
-  def amount=(a)
-    super(round_to_cent(a))
   end
 
   # note: on this virtual attribute date stuff, generally just use one or the other...

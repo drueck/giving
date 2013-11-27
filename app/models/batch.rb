@@ -3,7 +3,7 @@ class Batch < ActiveRecord::Base
   has_many :contributions, conditions: "status != 'Deleted'"
 
   def total_contributions
-    self.contributions.reduce(0) { |sum, c| sum += c.amount }
+    self.contributions.reduce(Money.new(0)) { |sum, c| sum += c.amount }
   end
 
   def posted_at_string
