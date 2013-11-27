@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131127035911) do
+ActiveRecord::Schema.define(version: 20131127042848) do
 
   create_table "batches", force: true do |t|
     t.datetime "created_at", null: false
@@ -20,13 +20,12 @@ ActiveRecord::Schema.define(version: 20131127035911) do
   end
 
   create_table "contributions", force: true do |t|
-    t.integer  "contributor_id",                                       null: false
-    t.date     "date",                                                 null: false
+    t.integer  "contributor_id", null: false
+    t.date     "date",           null: false
     t.string   "payment_type"
     t.string   "reference"
-    t.decimal  "amount",         precision: 8, scale: 2, default: 0.0, null: false
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "status"
     t.integer  "batch_id"
     t.integer  "amount_cents"
