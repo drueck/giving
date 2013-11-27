@@ -1,6 +1,6 @@
 class Batch < ActiveRecord::Base
 
-  has_many :contributions, conditions: "status != 'Deleted'"
+  has_many :contributions, -> { where.not(status: "Deleted") }
 
   def total_contributions
     self.contributions.reduce(Money.new(0)) { |sum, c| sum += c.amount }

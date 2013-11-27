@@ -1,6 +1,6 @@
 class PendingContribution < Contribution
 
-  default_scope { where('status = ?', 'Pending') }
+  default_scope { where(status: "Pending") }
 
   after_initialize :set_status_to_pending
 
