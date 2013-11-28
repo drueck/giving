@@ -1,6 +1,4 @@
 class Organization < ActiveRecord::Base
-  
-  attr_accessible :address, :city, :name, :phone, :state, :zip
 
   def address_lines
     lines = Array.new

@@ -43,7 +43,7 @@ describe Statement do
 
     describe '#total_contributions' do
       it 'should return the total of all the contribution amounts on the statement' do
-        total_amount = @statement.contributions.reduce(0) { |sum, c| sum += c.amount }
+        total_amount = @statement.contributions.reduce(Money.new(0)) { |sum, c| sum += c.amount }
         @statement.total_contributions.should eq total_amount
       end
     end

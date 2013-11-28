@@ -20,15 +20,15 @@ describe Batch do
     end
 
     describe '#contributions' do
-      
+
       it 'should return all non-deleted contributions on this batch' do
         batch = Batch.find(@batch_id)
         batch.contributions.length.should eq 1
-        batch.contributions.map { |c| c.id }.should include(@contribution.id) 
+        batch.contributions.map { |c| c.id }.should include(@contribution.id)
         batch.contributions.map { |c| c.id }.should_not include(@deleted_contribution.id)
-      end  
+      end
 
-    end 
+    end
 
     describe '#total_contributions' do
 

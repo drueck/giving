@@ -18,7 +18,6 @@ Giving::Application.routes.draw do
   get 'login' => 'sessions#new', :as => 'login'
   get 'logout' => 'sessions#destroy', :as => 'logout'
 
-  get 'statements' => 'statements#index', as: 'statements'
-  post 'statements' => 'statements#show', as: 'statements'
+  resources :statements, only: [:new, :create]
 
 end

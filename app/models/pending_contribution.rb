@@ -1,11 +1,11 @@
 class PendingContribution < Contribution
 
-  default_scope where('status = ?', 'Pending') 
+  default_scope { where(status: "Pending") }
 
   after_initialize :set_status_to_pending
 
   def self.total_amount_pending
-    sum(:amount)
+    Money.new(sum(:amount_cents))
   end
 
   protected

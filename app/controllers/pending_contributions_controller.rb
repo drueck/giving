@@ -41,7 +41,7 @@ class PendingContributionsController < ApplicationController
   end
 
   def create
-    @contribution = PendingContribution.new(params[:pending_contribution])
+    @contribution = PendingContribution.new(contribution_params)
     if @contribution.save
       respond_to do |format|
         format.html { redirect_to pending_contributions_url, notice: 'Contribution saved' }
@@ -60,10 +60,10 @@ class PendingContributionsController < ApplicationController
   def edit
     @contribution = PendingContribution.find(params[:id])
   end
-  
+
   def update
     @contribution = PendingContribution.find(params[:id])
-    if @contribution.update_attributes(params[:pending_contribution])
+    if @contribution.update_attributes(contribution_params)
       redirect_to pending_contributions_url, notice: 'Contribution updated'
     else
       render action: 'edit'
@@ -77,6 +77,15 @@ class PendingContributionsController < ApplicationController
   end
 
   protected
+
+  def contribution_params
+    if params[:pending_contribution][:date]
+      params[:pending_contribution][:date] =
+        Chronic.parse(params[:pending_contribution][:date])
+    end
+    params.require(:pending_contribution).permit(:amount, :date,
+      :contributor_id, :reference, :payment_type, :status)
+  end
 
   def setup_for_index
     @contributions = PendingContribution\

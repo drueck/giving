@@ -21,12 +21,12 @@ class ActiveContributorsController < ApplicationController
   end
 
   def create
-    @contributor = ActiveContributor.new(params[:active_contributor])
+    @contributor = ActiveContributor.new(contributor_params)
     if @contributor.save
       redirect_to active_contributors_url, notice: 'Successfully added new contributor'
     else
       render action: "new"
-    end  
+    end
   end
 
   def edit
@@ -42,7 +42,7 @@ class ActiveContributorsController < ApplicationController
 
   def update
     @contributor = ActiveContributor.find(params[:id])
-    if @contributor.update_attributes(params[:active_contributor])
+    if @contributor.update_attributes(contributor_params)
       redirect_to active_contributors_url, notice: 'Successfully updated contributor info'
     else
       render action: 'edit'
@@ -53,6 +53,13 @@ class ActiveContributorsController < ApplicationController
     @contributor = ActiveContributor.find(params[:id])
     @contributor.destroy
     redirect_to active_contributors_url
+  end
+
+  private
+
+  def contributor_params
+    params.require(:active_contributor).permit(:address, :city, :first_name,
+      :last_name, :state, :zip, :household_name, :phone, :email, :notes)
   end
 
 end

@@ -3,7 +3,7 @@
   <%= f.input :username, input_html: { autofocus: 'autofocus' } %>
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
-  <%= f.input :user_type, collection: User.user_types, selected: User.default_user_type %>
+  <%= f.input :user_type, collection: User::USER_TYPES, selected: User::DEFAULT_USER_TYPE %>
   <%= f.submit :class => 'btn' %>
   <%= link_to 'Cancel', users_path, class: 'btn' %>
 <% end %>

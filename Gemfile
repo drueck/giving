@@ -1,18 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+ruby '2.0.0'
+
+gem 'rails', '4.0.0'
 
 gem 'pg'
 gem 'thin'
 
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'less-rails'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'therubyracer', :platforms => :ruby
-  gem 'uglifier', '>= 1.0.3'
-  gem 'twitter-bootstrap-rails'
-end
+gem 'sass-rails',  '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'therubyracer', :platforms => :ruby
+gem 'uglifier', '>= 1.0.3'
+gem 'twitter-bootstrap-rails'
 
 group :test, :development do
   gem 'rspec-rails'
@@ -23,7 +22,7 @@ group :test, :development do
 end
 
 gem 'jquery-rails'
-gem 'simple_form'
+gem 'simple_form', git: 'git://github.com/plataformatec/simple_form.git'
 gem 'chronic'
 gem 'will_paginate', '~> 3.0.0'
 gem 'sorcery'
@@ -32,5 +31,4 @@ gem 'sorcery'
 # when 1.0.0 is released, that functionality should be included
 gem 'prawn', git: 'git://github.com/prawnpdf/prawn.git'
 gem 'figaro'
-
-gem 'newrelic_rpm'
+gem 'money-rails'

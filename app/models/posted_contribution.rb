@@ -1,6 +1,6 @@
 class PostedContribution < Contribution
 
-  default_scope where('contributions.status = ?', 'Posted') 
+  default_scope { where('contributions.status = ?', 'Posted') }
 
   after_initialize :set_status_to_posted
 
