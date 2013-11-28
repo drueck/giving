@@ -1,6 +1,6 @@
 #Giving
 
-[![Code Climate](https://codeclimate.com/repos/52278983f3ea00562401460c/badges/b395611252674d8146ea/gpa.png)](https://codeclimate.com/repos/52278983f3ea00562401460c/feed)
+[![Code Climate](https://codeclimate.com/github/drueck/giving.png)](https://codeclimate.com/github/drueck/giving)
 
 Giving is a web application designed for churches or other non-profits
 who need a very simple way to track contributions and generate annual 
