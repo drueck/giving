@@ -48,6 +48,8 @@ GEM
     arel (4.0.0)
     atomic (1.1.13)
     bcrypt-ruby (3.0.1)
+    bootstrap-sass (3.0.2.1)
+      sass (~> 3.2)
     builder (3.1.4)
     chronic (0.10.1)
     coderay (1.0.9)
@@ -200,11 +202,6 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     ttfunk (1.0.3)
-    twitter-bootstrap-rails (2.2.8)
-      actionpack (>= 3.1)
-      execjs
-      rails (>= 3.1)
-      railties (>= 3.1)
     tzinfo (0.3.37)
     uglifier (2.2.1)
       execjs (>= 0.3.0)
@@ -215,6 +212,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass (~> 3.0.2.0)
   chronic
   coffee-rails (~> 4.0.0)
   factory_girl_rails
@@ -233,6 +231,5 @@ DEPENDENCIES
   sorcery
   therubyracer
   thin
-  twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   will_paginate (~> 3.0.0)

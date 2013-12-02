@@ -11,7 +11,7 @@ gem 'sass-rails',  '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer', :platforms => :ruby
 gem 'uglifier', '>= 1.0.3'
-gem 'twitter-bootstrap-rails'
+gem 'bootstrap-sass', '~> 3.0.2.0'
 
 group :test, :development do
   gem 'rspec-rails'
