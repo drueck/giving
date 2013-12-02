@@ -9,10 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require datepicker
- *= require bootstrap_and_overrides
  *= require_self
  */
 
+@import "bootstrap";
 @import "app.css.scss";
 @import "contributions.css.scss";
 @import "contributors.css.scss";
