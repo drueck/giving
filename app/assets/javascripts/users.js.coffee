@@ -1,4 +1,5 @@
 $ ->
-  $("#users .pagination a").live "click", ->
+
+  $("#users .pagination a").on "click", ->
     $.getScript(this.href)
     return false
