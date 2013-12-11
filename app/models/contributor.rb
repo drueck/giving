@@ -4,41 +4,17 @@ class Contributor < ActiveRecord::Base
 
   has_many :posted_contributions, dependent: :destroy
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :household_name, presence: true
-
-  before_validation :generate_household_name_if_needed
-
-  def display_name
-    last_name + ', ' + first_name
-  end
-
-  def full_name
-    first_name + ' ' + last_name
-  end
+  validates :name, presence: true
 
   def <=>(other)
-    result = last_name <=> other.last_name
-    if result == 0
-      result = first_name <=> other.first_name
-    end
-    result
+    name <=> other.name
   end
 
   def self.names_search(query)
     if query.present?
-      where("first_name @@ :q or last_name @@ :q or household_name @@ :q", q: query)
+      where("name @@ :q", q: query)
     else
       all
-    end
-  end
-
-  protected
-
-  def generate_household_name_if_needed
-    if(first_name.present? && last_name.present? && household_name.blank?)
-      self.household_name = first_name + ' ' + last_name
     end
   end
 

@@ -11,7 +11,7 @@
   <tbody>
     <% @contributors.each do |contributor| %>
       <tr>
-        <td><%= link_to contributor.display_name, edit_active_contributor_path(contributor) %></td>
+        <td><%= link_to contributor.name, edit_active_contributor_path(contributor) %></td>
         <td><%= contributor.address %></td>
         <td><%= contributor.city %></td>
         <td><%= contributor.state %></td>

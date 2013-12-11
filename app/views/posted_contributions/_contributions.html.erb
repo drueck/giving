@@ -14,7 +14,7 @@
       <% @contributions.each do |contribution| %>
         <tr>
           <td><%= link_to 'Edit', edit_posted_contribution_path(contribution) %></td>
-          <td><%= link_to contribution.contributor.display_name, edit_active_contributor_path(contribution.contributor) %></td>
+          <td><%= link_to contribution.contributor.name, edit_active_contributor_path(contribution.contributor) %></td>
           <td><%= contribution.date_string %></td>
           <td><%= contribution.payment_type %></td>
           <td><%= contribution.reference %></td>

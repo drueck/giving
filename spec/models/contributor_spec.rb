@@ -16,14 +16,14 @@ describe Contributor do
   describe '#<=>' do
 
     before do
-      @aa = Contributor.create(last_name: 'a', first_name: 'a')
-      @ab = Contributor.create(last_name: 'a', first_name: 'b')
-      @ba = Contributor.create(last_name: 'b', first_name: 'a')
+      @a = Contributor.create(name: 'a')
+      @b = Contributor.create(name: 'b')
+      @c = Contributor.create(name: 'c')
     end
 
-    it 'compares contributors by last name then first name' do
-      @aa.should be < @ab
-      @ab.should be < @ba  
+    it 'compares contributors by name' do
+      @a.should be < @b
+      @b.should be < @c
     end
 
   end

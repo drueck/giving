@@ -5,12 +5,12 @@
       <%= f.input :contributor_id, required: true do %>
         <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus"
           class="form-control"
-          value="<%= (@contribution.contributor ? @contribution.contributor.full_name : '') %>" />
+          value="<%= (@contribution.contributor ? @contribution.contributor.name : '') %>" />
         <input type="hidden" class="required" id="contribution_contributor_id" name="pending_contribution[contributor_id]"
           value="<%= (@contribution.contributor ? @contribution.contributor.id : '') %>" />
       <% end %>
       <script type="text/javascript">
-        var contributors = <%= ActiveContributor.all.map { |c| { id: c.id, name: c.full_name } }.to_json.html_safe %>;
+        var contributors = <%= ActiveContributor.all.map { |c| { id: c.id, name: c.name } }.to_json.html_safe %>;
         $('#contributor-name').typeahead({
           source: contributors,
           itemSelected: function(item, val, text) {

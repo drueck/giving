@@ -4,7 +4,7 @@ class ActiveContributorsController < ApplicationController
 
   def index
     @contributors = ActiveContributor.names_search(params[:query])\
-      .order('last_name, first_name')\
+      .order(:name)
       .paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html
@@ -45,6 +45,9 @@ class ActiveContributorsController < ApplicationController
     if @contributor.update_attributes(contributor_params)
       redirect_to active_contributors_url, notice: 'Successfully updated contributor info'
     else
+      @contributions = @contributor.posted_contributions\
+        .order('date desc, id desc')\
+        .paginate(page: params[:page], per_page: 10)
       render action: 'edit'
     end
   end
@@ -58,8 +61,8 @@ class ActiveContributorsController < ApplicationController
   private
 
   def contributor_params
-    params.require(:active_contributor).permit(:address, :city, :first_name,
-      :last_name, :state, :zip, :household_name, :phone, :email, :notes)
+    params.require(:active_contributor).permit(:address, :city, :state, :zip,
+      :name, :phone, :email, :notes)
   end
 
 end

@@ -48,7 +48,7 @@ class BatchReport < Prawn::Document
   end
 
   def contribution_to_array(contribution)
-    [ contribution.contributor.display_name,
+    [ contribution.contributor.name,
       contribution.date_string,
       contribution.payment_type,
       contribution.reference,

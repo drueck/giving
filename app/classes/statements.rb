@@ -9,7 +9,7 @@ class Statements
   end
 
   def each(&blk)
-    @statements.each(&blk)  
+    @statements.each(&blk)
   end
 
   protected
@@ -22,7 +22,7 @@ class Statements
     end_date = '12/31/' + year.to_s
     contributors = Contributor.joins(:posted_contributions)
       .where('contributions.date >= :start_date and contributions.date <= :end_date and contributions.status != :deleted',
-        start_date: start_date, end_date: end_date, deleted: 'Deleted').order('last_name, first_name').uniq
+        start_date: start_date, end_date: end_date, deleted: 'Deleted').order('name').uniq
     contributors.each do |contributor|
       @statements << statement_class.new(contributor, start_date, end_date)
     end

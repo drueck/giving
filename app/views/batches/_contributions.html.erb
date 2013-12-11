@@ -12,7 +12,7 @@
     <tbody>
       <% @contributions.each do |contribution| %>
         <tr>
-          <td><%= contribution.contributor.display_name %></td>
+          <td><%= contribution.contributor.name %></td>
           <td><%= contribution.date_string %></td>
           <td><%= contribution.payment_type %></td>
           <td><%= contribution.reference %></td>

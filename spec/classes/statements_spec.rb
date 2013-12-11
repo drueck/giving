@@ -6,11 +6,11 @@ describe Statements do
     @contributor1 = FactoryGirl.create(:contributor)
     2.times { FactoryGirl.create(:posted_contribution, contributor: @contributor1, date: Chronic.parse('7/22/2012')) }
     FactoryGirl.create(:posted_contribution, contributor: @contributor1, date: Chronic.parse('7/22/2011'))
-    
+
     @contributor2 = FactoryGirl.create(:contributor)
     2.times { FactoryGirl.create(:posted_contribution, contributor: @contributor2, date: Chronic.parse('7/22/2012')) }
     FactoryGirl.create(:posted_contribution, contributor: @contributor2, date: Chronic.parse('7/22/2011'))
-    
+
     @contributor3 = FactoryGirl.create(:contributor)
     FactoryGirl.create(:posted_contribution, contributor: @contributor3, date: Chronic.parse('1/4/2010'))
 
@@ -37,7 +37,7 @@ describe Statements do
     end
 
     context 'and each statement' do
-      
+
       it 'should have a start date of the first day of the specified year' do
         Chronic.parse(@statements.first.start_date).should eq Chronic.parse('1/1/' + @year.to_s)
       end
@@ -46,7 +46,7 @@ describe Statements do
         Chronic.parse(@statements.first.end_date).should eq Chronic.parse('12/31/' + @year.to_s)
       end
 
-    end     
+    end
 
   end
 

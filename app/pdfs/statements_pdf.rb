@@ -18,7 +18,7 @@ class StatementsPdf < Prawn::Document
     statements_count = statements.length
     return if statements_count < 1
 
-    add_statement statements[0] 
+    add_statement statements[0]
 
     if statements_count > 1
       statements[1..statements_count-1].each do |statement|
@@ -35,7 +35,7 @@ class StatementsPdf < Prawn::Document
     last_page_index = pages.length - 1
     pages.each_index do |page_index|
       start_new_page unless page_index == 0
-      add_statement_page(statement, pages[page_index], last_page: page_index == last_page_index) 
+      add_statement_page(statement, pages[page_index], last_page: page_index == last_page_index)
     end
   end
 
@@ -75,7 +75,7 @@ class StatementsPdf < Prawn::Document
     lines = organization_address_lines
     text lines[0], style: :bold unless lines.length < 1
     if lines.length > 1
-      lines[1..lines.length-1].each do |line| 
+      lines[1..lines.length-1].each do |line|
         text line
       end
     end
@@ -83,7 +83,7 @@ class StatementsPdf < Prawn::Document
 
   def add_heading(statement)
     move_down 0.25.in
-    contributor_name = statement.contributor.full_name
+    contributor_name = statement.contributor.name
     start_date = format_date(statement.start_date)
     end_date = format_date(statement.end_date)
     text "Contributions by #{contributor_name}", size: 14, style: :bold, align: :center
@@ -94,7 +94,7 @@ class StatementsPdf < Prawn::Document
     move_down 0.25.in
     indent(0.5.in) do
       contributor = statement.contributor
-      text contributor.household_name, style: :bold
+      text contributor.name, style: :bold
       text contributor.address
       text "#{contributor.city}, #{contributor.state} #{contributor.zip}"
     end
@@ -115,13 +115,13 @@ class StatementsPdf < Prawn::Document
   end
 
   def get_data_rows(data, page_number)
-    [contributions_table_headings] + 
+    [contributions_table_headings] +
       data[((page_number-1)*contributions_per_page)..((page_number*contributions_per_page)-1)]
   end
 
   def get_total_row(statement)
     total_contributions = number_to_currency(statement.total_contributions)
-    total_row = [ { content: 'Total', colspan: 4 }, total_contributions ]  
+    total_row = [ { content: 'Total', colspan: 4 }, total_contributions ]
     total_row
   end
 
@@ -166,7 +166,7 @@ class StatementsPdf < Prawn::Document
   end
 
   def contributions_table_headings
-    [ 'Contributor', 
+    [ 'Contributor',
       'Date Recorded',
       'Type',
       'Reference',
@@ -174,7 +174,7 @@ class StatementsPdf < Prawn::Document
   end
 
   def contribution_to_array(contribution)
-    [ contribution.contributor.display_name,
+    [ contribution.contributor.name,
       contribution.date_string,
       contribution.payment_type,
       contribution.reference,

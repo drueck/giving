@@ -1,7 +1,5 @@
 <%= simple_form_for @contributor, :html => { :role => "form" } do |f| %>
-  <%= f.input :first_name, label: 'First Name', input_html: { autofocus: 'autofocus' } %>
-  <%= f.input :last_name, label: 'Last Name' %>
-  <%= f.input :household_name, label: 'Household Name', input_html: { placeholder: 'Leave blank for default' } %>
+  <%= f.input :name, input_html: { autofocus: 'autofocus' } %>
   <%= f.input :address %>
   <%= f.input :city %>
   <%= f.input :state %>

@@ -1,14 +1,14 @@
 <%= simple_form_for @contribution do |f| %>
 
   <%= f.input :contributor_id, required: true do %>
-    <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus"
-      value="<%= (@contribution.contributor ? @contribution.contributor.full_name : '') %>" />
+    <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus" class="form-control"
+      value="<%= (@contribution.contributor ? @contribution.contributor.name : '') %>" />
     <input type="hidden" class="required" id="contribution_contributor_id" name="posted_contribution[contributor_id]"
       value="<%= (@contribution.contributor ? @contribution.contributor.id : '') %>" />
   <% end %>
 
   <script type="text/javascript">
-    var contributors = <%= ActiveContributor.all.map { |c| { id: c.id, name: c.full_name } }.to_json.html_safe %>;
+    var contributors = <%= ActiveContributor.all.map { |c| { id: c.id, name: c.name } }.to_json.html_safe %>;
     $('#contributor-name').typeahead({
       source: contributors,
       itemSelected: function(item, val, text) {
@@ -23,13 +23,13 @@
   <%= f.input :payment_type, label: 'Payment Type', collection: [ 'Check', 'Cash', 'Other' ], selected: 'Check' %>
   <%= f.input :reference %>
   <div class="buttons">
-    <%= f.button :submit, 'Save', :class => 'btn' %>
-    <%= link_to 'Cancel', posted_contributions_path, :class => 'btn' %>
+    <%= f.button :submit, 'Save', :class => 'btn btn-default' %>
+    <%= link_to 'Cancel', posted_contributions_path, :class => 'btn btn-default' %>
     <% if @contribution.id %>
       <%= link_to 'Delete', posted_contribution_path(@contribution),
         method: :delete,
         data: { confirm: 'Are you sure?' },
-        class: 'btn' %>
+        class: 'btn btn-default' %>
     <% end %>
   </div>
 
