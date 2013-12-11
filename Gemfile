@@ -14,11 +14,11 @@ gem 'uglifier', '>= 1.0.3'
 gem 'bootstrap-sass', '~> 3.0.2.0'
 
 group :test, :development do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.14.0'
   gem 'factory_girl_rails'
-  gem 'guard-rspec'
-  gem 'rb-inotify', '~> 0.8.8'
-	gem 'rb-readline'
+  gem 'guard-rspec', '~> 4.2.0'
+  gem 'listen', '~> 2.0'
+	gem 'rb-readline', '~> 0.4.2'
 end
 
 gem 'jquery-rails'
