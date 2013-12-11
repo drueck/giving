@@ -1,9 +1,9 @@
 <%= simple_form_for @contribution, remote: true do |f| %>
   <div class="row">
     <%= f.input :status, as: :hidden %>
-    <div class="span2">
+    <div class="col-md-2">
       <%= f.input :contributor_id, required: true do %>
-        <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus" class="span2"
+        <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus" class="form-control"
           value="<%= (@contribution.contributor ? @contribution.contributor.full_name : '') %>" />
         <input type="hidden" class="required" id="contribution_contributor_id" name="posted_contribution[contributor_id]"
           value="<%= (@contribution.contributor ? @contribution.contributor.id : '') %>" />
@@ -18,23 +18,25 @@
         });
       </script>
     </div>
-    <div class="span2">
+    <div class="col-md-2">
       <%= f.input :date, as: :string, label: 'Date',
-        input_html: { value: @contribution.date_string, class: 'datepicker span2' } %>
+        input_html: { value: @contribution.date_string, class: 'datepicker' } %>
     </div>
-    <div class="span2">
-      <%= f.input :amount, input_html: { class: 'span2' } %>
+    <div class="col-md-2">
+      <%= f.input :amount %>
     </div>
-    <div class="span2">
+    <div class="col-md-2">
       <%= f.input :payment_type, label: 'Payment Type',
-        collection: [ 'Check', 'Cash', 'Other' ], selected: 'Check', input_html: { class: 'span2' } %>
+        collection: [ 'Check', 'Cash', 'Other' ], selected: 'Check' %>
     </div>
-    <div class="span2">
-      <%= f.input :reference, input_html: { class: 'span2' } %>
+    <div class="col-md-2">
+      <%= f.input :reference %>
     </div>
-    <div class="span2">
-      <label>&nbsp;</label>
-      <%= f.button :submit, 'Add', :class => 'span2' %>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label class="control-label">&nbsp;</label>
+        <%= f.button :submit, 'Add', :class => 'btn-default form-control' %>
+      </div>
     </div>
   </div>
 <% end %>

@@ -1,11 +1,11 @@
 <h1>Organization Information</h1>
 <%= simple_form_for @organization, url: organization_path do |f| %>
-  <%= f.input :name, input_html: { class: 'span4' } %>
-  <%= f.input :address, input_html: { class: 'span4' } %>
-  <%= f.input :city, input_html: { class: 'span4' } %>
-  <%= f.input :state, input_html: { class: 'span4' } %>
-  <%= f.input :zip, input_html: { class: 'span4' } %>
-  <%= f.input :phone, input_html: { class: 'span4' } %>
-  <%= f.submit 'Save', class: 'btn' %>
-  <%= link_to 'Cancel', root_url, class: 'btn' %>
+  <%= f.input :name %>
+  <%= f.input :address %>
+  <%= f.input :city %>
+  <%= f.input :state %>
+  <%= f.input :zip %>
+  <%= f.input :phone %>
+  <%= f.submit 'Save', class: 'btn btn-default' %>
+  <%= link_to 'Cancel', root_url, class: 'btn btn-default' %>
 <% end %>

@@ -1,23 +1,19 @@
 <h1>Statements</h1>
 <%= form_tag statements_path do %>
-  <div class="control-group">
+  <div class="form-group">
     <label class="control-label">Year</label>
-    <div class="controls">
-      <select name="year" class="span2">
-        <%= @years.each do |year| %>
-          <option value="<%= year %>"><%= year %></option>
-        <% end %>
-      </select>
-    </div>
+    <select name="year" class="form-control">
+      <%= @years.each do |year| %>
+        <option value="<%= year %>"><%= year %></option>
+      <% end %>
+    </select>
   </div>
-  <div class="control-group">
+  <div class="form-group">
     <label class="control-label">Message to Contributors</label>
-    <div class="controls">
-      <div class="textarea">
-        <textarea name="message" class="span6"></textarea>
-      </div>
-    </div>
+    <textarea name="message" class="form-control"></textarea>
   </div>
-  <%= submit_tag 'Submit', class: 'btn' %>
-  <%= link_to 'Cancel', root_url, class: 'btn' %>
+  <div class="form-group">
+    <%= submit_tag 'Submit', class: 'btn btn-default' %>
+    <%= link_to 'Cancel', root_url, class: 'btn btn-default' %>
+  </div>
 <% end %>

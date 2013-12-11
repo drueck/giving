@@ -5,4 +5,4 @@
 <p class="total-contributions">
   Total: <span id="total-contributions"><%= number_to_currency(@batch.total_contributions) %></span>
 </p>
-<%= link_to 'Batch Report PDF', batch_path(@batch, format: :pdf, d: 'inline'), class: 'btn' %>
+<%= link_to 'Batch Report PDF', batch_path(@batch, format: :pdf, d: 'inline'), class: 'btn btn-default' %>

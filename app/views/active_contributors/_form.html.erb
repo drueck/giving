@@ -1,4 +1,4 @@
-<%= simple_form_for @contributor, :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_form_for @contributor, :html => { :role => "form" } do |f| %>
   <%= f.input :first_name, label: 'First Name', input_html: { autofocus: 'autofocus' } %>
   <%= f.input :last_name, label: 'Last Name' %>
   <%= f.input :household_name, label: 'Household Name', input_html: { placeholder: 'Leave blank for default' } %>
@@ -10,13 +10,13 @@
   <%= f.input :email %>
   <%= f.input :notes, input_html: { rows: 4 } %>
   <div class="buttons">
-    <%= f.button :submit, 'Save', :class => 'btn' %>
-    <%= link_to 'Cancel', active_contributors_path, :class => 'btn' %>
+    <%= f.button :submit, 'Save', :class => 'btn btn-default' %>
+    <%= link_to 'Cancel', active_contributors_path, :class => 'btn btn-default' %>
     <% if @contributor.id %>
       <%= link_to 'Delete', active_contributor_path(@contributor),
         method: :delete,
         data: { confirm: 'Deleting this contributor will delete any associated contributions. Are you sure?' },
-        class: 'btn' %>
+        class: 'btn btn-default' %>
     <% end %>
   </div>
 <% end %>
