@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131211034751) do
+ActiveRecord::Schema.define(version: 20131211065057) do
 
   create_table "batches", force: true do |t|
     t.datetime "created_at", null: false
@@ -36,10 +36,10 @@ ActiveRecord::Schema.define(version: 20131211034751) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "name",       null: false
-    t.string   "status"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "name",                          null: false
+    t.string   "status",     default: "Active", null: false
     t.string   "phone"
     t.string   "email"
     t.text     "notes"
