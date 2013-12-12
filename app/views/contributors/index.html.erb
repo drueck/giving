@@ -1,5 +1,5 @@
 <h1>Contributors</h1>
-<%= form_tag active_contributors_path, method: 'get', id: 'contributor-search', class: 'form-inline' do %>
+<%= form_tag contributors_path, method: 'get', id: 'contributor-search', class: 'form-inline' do %>
   <div class="form-group">
     <label class="sr-only">Contributor Name</label>
     <%= text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Contributor Name' %>
@@ -9,4 +9,4 @@
 <div id="contributors">
   <%= render 'contributors' %>
 </div>
-<%= link_to 'New Contributor', new_active_contributor_path, :class => 'btn btn-default' %>
+<%= link_to 'New Contributor', new_contributor_path, :class => 'btn btn-default' %>

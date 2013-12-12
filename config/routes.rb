@@ -4,7 +4,7 @@ Giving::Application.routes.draw do
 
   resource :organization, only: [:edit, :update]
 
-  resources :active_contributors, path: 'contributors'
+  resources :contributors
   resources :posted_contributions, path: 'posted-contributions'
   resources :pending_contributions, path: 'pending-contributions' do
     collection do

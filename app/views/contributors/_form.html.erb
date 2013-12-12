@@ -9,9 +9,9 @@
   <%= f.input :notes, input_html: { rows: 4 } %>
   <div class="buttons">
     <%= f.button :submit, 'Save', :class => 'btn btn-default' %>
-    <%= link_to 'Cancel', active_contributors_path, :class => 'btn btn-default' %>
+    <%= link_to 'Cancel', contributors_path, :class => 'btn btn-default' %>
     <% if @contributor.id %>
-      <%= link_to 'Delete', active_contributor_path(@contributor),
+      <%= link_to 'Delete', contributor_path(@contributor),
         method: :delete,
         data: { confirm: 'Deleting this contributor will delete any associated contributions. Are you sure?' },
         class: 'btn btn-default' %>
