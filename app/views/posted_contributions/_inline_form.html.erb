@@ -9,7 +9,7 @@
           value="<%= (@contribution.contributor ? @contribution.contributor.id : '') %>" />
       <% end %>
       <script type="text/javascript">
-        var contributors = <%= ActiveContributor.all.map { |c| { id: c.id, name: c.name } }.to_json.html_safe %>;
+        var contributors = <%= Contributor.active.map { |c| { id: c.id, name: c.name } }.to_json.html_safe %>;
         $('#contributor-name').typeahead({
           source: contributors,
           itemSelected: function(item, val, text) {
