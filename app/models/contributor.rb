@@ -2,6 +2,8 @@ class Contributor < ActiveRecord::Base
 
   include Comparable
 
+  scope :active, -> { where(status: "Active") }
+
   has_many :posted_contributions, dependent: :destroy
 
   validates :name, presence: true
@@ -12,9 +14,29 @@ class Contributor < ActiveRecord::Base
 
   def self.names_search(query)
     if query.present?
-      where("name @@ :q", q: query)
+      active.where("name @@ :q", q: query)
     else
-      all
+      active
+    end
+  end
+
+  def mark_deleted
+    self.class.transaction do
+      mark_contributions_deleted
+      mark_self_deleted
+      save
+    end
+  end
+
+  private
+
+  def mark_self_deleted
+    self.status = "Deleted"
+  end
+
+  def mark_contributions_deleted
+    posted_contributions.each do |c|
+      c.destroy
     end
   end
 

@@ -2,13 +2,23 @@ require 'spec_helper'
 
 describe Contributor do
 
-  describe '#destroy' do
+  describe "#mark_deleted" do
 
-    it 'deletes the record' do
-      contributor = FactoryGirl.create(:contributor)
-      id = contributor.id
-      contributor.destroy
-      Contributor.where(id: id).length.should eq 0
+    before do
+      @contributor = described_class.new
+      @contributor.posted_contributions << PostedContribution.new
+      @contributor.posted_contributions << PostedContribution.new
+      @contributor.mark_deleted
+    end
+
+    it 'should set the contributor status to deleted' do
+      @contributor.status.should eq 'Deleted'
+    end
+
+    it 'should set the status of related contributions to deleted' do
+      @contributor.posted_contributions.each do |contribution|
+        contribution.status.should eq 'Deleted'
+      end
     end
 
   end
