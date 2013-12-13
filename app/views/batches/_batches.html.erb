@@ -2,14 +2,16 @@
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
-        <th>Batch Posted Date</th>
-        <td>Total Contributions</th>
+        <th>Name</th>
+        <th>Created</th>
+        <th>Total Contributions</th>
       </tr>
     </thead>
     <tbody>
       <% @batches.each do |batch| %>
         <tr>
-          <td><%= link_to batch.posted_at_string, batch_path(batch) %></td>
+          <td><%= link_to batch.title, batch_path(batch) %></td>
+          <td><%= batch.created_at_string %></td>
           <td><%= number_to_currency(batch.total_contributions) %></td>
         </tr>
       <% end %>

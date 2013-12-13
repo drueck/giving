@@ -15,8 +15,8 @@ class Statement
   attr_reader :contributor, :start_date, :end_date
 
   def contributions
-    self.contributor.posted_contributions.where('date >= :start_date and date <= :end_date',
-      start_date: start_date, end_date: end_date).order('date')
+    self.contributor.contributions.where('date >= :start_date and date <= :end_date',
+      start_date: start_date, end_date: end_date).order('date').decorate
   end
 
   def total_contributions

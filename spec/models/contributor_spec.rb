@@ -6,8 +6,7 @@ describe Contributor do
 
     before do
       @contributor = described_class.new
-      @contributor.posted_contributions << PostedContribution.new
-      @contributor.posted_contributions << PostedContribution.new
+      @contributor.contributions << FactoryGirl.build(:contribution)
       @contributor.mark_deleted
     end
 
@@ -16,7 +15,7 @@ describe Contributor do
     end
 
     it 'should set the status of related contributions to deleted' do
-      @contributor.posted_contributions.each do |contribution|
+      @contributor.contributions.each do |contribution|
         contribution.status.should eq 'Deleted'
       end
     end

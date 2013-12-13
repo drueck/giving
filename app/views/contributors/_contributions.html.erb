@@ -13,7 +13,7 @@
     <tbody>
       <% @contributions.each do |contribution| %>
         <tr>
-          <td><%= link_to 'Edit', edit_posted_contribution_path(contribution) %></td>
+          <td><%= link_to 'Edit', edit_contribution_path(contribution) %></td>
           <td><%= contribution.date_string %></td>
           <td><%= contribution.payment_type %></td>
           <td><%= contribution.reference %></td>

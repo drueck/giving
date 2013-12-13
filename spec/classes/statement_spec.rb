@@ -9,10 +9,10 @@ describe Statement do
       @start_date = '1/1/2012'
       @end_date = '12/31/2012'
       @statement = Statement.new(@contributor, @start_date, @end_date)
-      @included_contribution = FactoryGirl.create(:posted_contribution, contributor: @contributor, date: Chronic.parse('7/22/2012'))
-      @excluded_contribution = FactoryGirl.create(:posted_contribution, contributor: @contributor, date: Chronic.parse('7/22/2011'))
-      @deleted_contribution = FactoryGirl.create(:posted_contribution, contributor: @contributor, date: Chronic.parse('1/1/2012'))
-      @deleted_contribution.destroy
+      @included_contribution = FactoryGirl.create(:contribution, contributor: @contributor, date: Chronic.parse('7/22/2012'))
+      @excluded_contribution = FactoryGirl.create(:contribution, contributor: @contributor, date: Chronic.parse('7/22/2011'))
+      @deleted_contribution = FactoryGirl.create(:deleted_contribution, contributor: @contributor,
+        date: Chronic.parse('1/1/2012'))
     end
 
     describe '#contributor' do
@@ -57,8 +57,8 @@ describe Statement do
       @start_date = Chronic.parse('1/1/2012').to_date
       @end_date = Chronic.parse('12/31/2012').to_date
       @statement = Statement.new(@contributor, @start_date, @end_date)
-      @included_contribution = FactoryGirl.create(:posted_contribution, contributor: @contributor, date: Chronic.parse('7/22/2012'))
-      @excluded_contribution = FactoryGirl.create(:posted_contribution, contributor: @contributor, date: Chronic.parse('7/22/2011'))
+      @included_contribution = FactoryGirl.create(:contribution, contributor: @contributor, date: Chronic.parse('7/22/2012'))
+      @excluded_contribution = FactoryGirl.create(:contribution, contributor: @contributor, date: Chronic.parse('7/22/2011'))
     end
 
     describe '#contributor' do

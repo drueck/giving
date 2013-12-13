@@ -1,12 +1,14 @@
 class Contribution < ActiveRecord::Base
 
+  default_scope { where.not(status: "Deleted") }
+
   belongs_to :contributor
   belongs_to :batch
 
   monetize :amount_cents
 
   validates :contributor_id, presence: true
-  validates :amount_cents, presence: true, numericality: { greater_than: 0 }
+  validates :amount, presence: true, numericality: { greater_than: 0 }
   validates :date, presence: true
 
   def self.year_range
@@ -16,8 +18,9 @@ class Contribution < ActiveRecord::Base
     first_year..last_year
   end
 
-  def date_string
-    date.nil? ? "" : date.strftime("%m/%d/%Y")
+  def mark_deleted
+    self.status = "Deleted"
+    save
   end
 
 end

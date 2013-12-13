@@ -20,7 +20,7 @@ class Statements
     @statements = []
     start_date = '1/1/' + year.to_s
     end_date = '12/31/' + year.to_s
-    contributors = Contributor.active.joins(:posted_contributions)
+    contributors = Contributor.joins(:contributions)
       .where('contributions.date >= :start_date and contributions.date <= :end_date and contributions.status != :deleted',
         start_date: start_date, end_date: end_date, deleted: 'Deleted').order('name').uniq
     contributors.each do |contributor|

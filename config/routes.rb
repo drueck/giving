@@ -5,12 +5,7 @@ Giving::Application.routes.draw do
   resource :organization, only: [:edit, :update]
 
   resources :contributors
-  resources :posted_contributions, path: 'posted-contributions'
-  resources :pending_contributions, path: 'pending-contributions' do
-    collection do
-      post 'post'
-    end
-  end
+  resources :contributions
   resources :users
   resources :sessions
   resources :batches

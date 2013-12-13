@@ -3,20 +3,23 @@ require 'spec_helper'
 describe Statements do
 
   before do
-    @contributor1 = FactoryGirl.create(:contributor)
-    2.times { FactoryGirl.create(:posted_contribution, contributor: @contributor1, date: Chronic.parse('7/22/2012')) }
-    FactoryGirl.create(:posted_contribution, contributor: @contributor1, date: Chronic.parse('7/22/2011'))
+    @active_contributor = FactoryGirl.create(:contributor)
+    FactoryGirl.create(:contribution, contributor: @active_contributor, date: Chronic.parse('7/22/2012'))
+    FactoryGirl.create(:contribution, contributor: @active_contributor, date: Chronic.parse('7/22/2011'))
 
-    @contributor2 = FactoryGirl.create(:contributor)
-    2.times { FactoryGirl.create(:posted_contribution, contributor: @contributor2, date: Chronic.parse('7/22/2012')) }
-    FactoryGirl.create(:posted_contribution, contributor: @contributor2, date: Chronic.parse('7/22/2011'))
+    @other_active_contributor = FactoryGirl.create(:contributor)
+    FactoryGirl.create(:contribution, contributor: @other_active_contributor, date: Chronic.parse('7/22/2012'))
 
-    @contributor3 = FactoryGirl.create(:contributor)
-    FactoryGirl.create(:posted_contribution, contributor: @contributor3, date: Chronic.parse('1/4/2010'))
+    @contributor_with_no_current_contributions = FactoryGirl.create(:contributor)
+    FactoryGirl.create(:contribution, contributor: @contributor_with_no_current_contributions,
+      date: Chronic.parse('1/4/2010'))
 
-    @contributor4 = FactoryGirl.create(:contributor)
-    deleted_contribution = FactoryGirl.create(:posted_contribution, contributor: @contributor4, date: Chronic.parse('1/1/2012'))
-    deleted_contribution.destroy
+    @contributor_with_only_deleted_contributions = FactoryGirl.create(:contributor)
+    FactoryGirl.create(:deleted_contribution, contributor: @contributor_with_only_deleted_contributions,
+      date: Chronic.parse('1/1/2012'))
+
+    @deleted_contributor = FactoryGirl.create(:deleted_contributor)
+    FactoryGirl.create(:contribution, contributor: @deleted_contributor, date: Chronic.parse('1/1/2012'))
 
     @year = 2012
     @statements = Statements.new(@year)
@@ -31,9 +34,11 @@ describe Statements do
       end
       statements.length.should eq 2
       contributors_ids = statements.map { |st| st.contributor.id }
-      contributors_ids.should include(@contributor1.id)
-      contributors_ids.should include(@contributor2.id)
-      contributors_ids.should_not include(@contributor3.id)
+      contributors_ids.should include(@active_contributor.id)
+      contributors_ids.should include(@other_active_contributor.id)
+      contributors_ids.should_not include(@contributor_with_no_current_contributions.id)
+      contributors_ids.should_not include(@contributor_with_only_deleted_contributions.id)
+      contributors_ids.should_not include(@deleted_contributor.id)
     end
 
     context 'and each statement' do

@@ -3,7 +3,7 @@ class ContributorsController < ApplicationController
   before_filter :require_login
 
   def index
-    @contributors = Contributor.names_search(params[:query])\
+    @contributors = Contributor.name_search(params[:query])
       .order(:name)
       .paginate(page: params[:page], per_page: 10)
     respond_to do |format|
@@ -13,7 +13,7 @@ class ContributorsController < ApplicationController
   end
 
   def show
-    @contributor = Contributor.active.find(params[:id])
+    @contributor = Contributor.find(params[:id])
   end
 
   def new
@@ -30,10 +30,8 @@ class ContributorsController < ApplicationController
   end
 
   def edit
-    @contributor = Contributor.active.find(params[:id])
-    @contributions = @contributor.posted_contributions\
-      .order('date desc, id desc')\
-      .paginate(page: params[:page], per_page: 10)
+    @contributor = Contributor.find(params[:id])
+    @contributions = page_of_contributions(@contributor)
     respond_to do |format|
       format.html
       format.js
@@ -41,19 +39,17 @@ class ContributorsController < ApplicationController
   end
 
   def update
-    @contributor = Contributor.active.find(params[:id])
+    @contributor = Contributor.find(params[:id])
     if @contributor.update_attributes(contributor_params)
       redirect_to contributors_url, notice: 'Successfully updated contributor info'
     else
-      @contributions = @contributor.posted_contributions\
-        .order('date desc, id desc')\
-        .paginate(page: params[:page], per_page: 10)
+      @contributions = page_of_contributions(@contributor)
       render action: 'edit'
     end
   end
 
   def destroy
-    @contributor = Contributor.active.find(params[:id])
+    @contributor = Contributor.find(params[:id])
     @contributor.mark_deleted
     redirect_to contributors_url
   end
@@ -63,6 +59,13 @@ class ContributorsController < ApplicationController
   def contributor_params
     params.require(:contributor).permit(:address, :city, :state, :zip,
       :name, :phone, :email, :notes)
+  end
+
+  def page_of_contributions(contributor)
+    contributor.contributions
+      .order('date desc, id desc')
+      .paginate(page: params[:page], per_page: 10)
+      .decorate
   end
 
 end

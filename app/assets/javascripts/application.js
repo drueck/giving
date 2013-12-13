@@ -15,4 +15,5 @@
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require bootstrap-typeahead
+//= require mousetrap.min
 //= require_tree .

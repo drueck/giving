@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
-    if no_admins
+    if no_admins?
       redirect_to new_user_url
     end
   end

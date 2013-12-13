@@ -1,12 +1,13 @@
-class PostedContributionsController < ApplicationController
+class ContributionsController < ApplicationController
 
   before_filter :require_login
 
   def index
-    @contributions = PostedContribution\
-      .order('date desc, id desc')\
+    @contributions = Contribution
+      .order('date desc, id desc')
       .paginate(page: params[:page], per_page: 10)
-    @contribution = PostedContribution.new
+      .decorate
+    @contribution = Contribution.new
     respond_to do |format|
       format.html
       format.js
@@ -14,21 +15,22 @@ class PostedContributionsController < ApplicationController
   end
 
   def show
-    @contribution = PostedContribution.find(params[:id])
+    @contribution = Contribution.find(params[:id])
   end
 
   def new
-    @contribution = PostedContribution.new
+    @contribution = Contribution.new
   end
 
   def create
-    @contribution = PostedContribution.new(contribution_params)
+    @contribution = Contribution.new(contribution_params)
     if @contribution.save
       respond_to do |format|
-        format.html { redirect_to posted_contributions_url, notice: 'Contribution saved' }
+        format.html { redirect_to contributions_url, notice: 'Contribution saved' }
         format.js do
-          @contributions = PostedContribution.order('date desc, id desc').paginate(page: 1, per_page: 10)
-          @contribution = PostedContribution.new
+          @contributions = Contribution.order('date desc, id desc')
+            .paginate(page: 1, per_page: 10).decorate
+          @contribution = Contribution.new
         end
       end
     else
@@ -40,32 +42,32 @@ class PostedContributionsController < ApplicationController
   end
 
   def edit
-    @contribution = PostedContribution.find(params[:id])
+    @contribution = Contribution.find(params[:id])
   end
 
   def update
-    @contribution = PostedContribution.find(params[:id])
+    @contribution = Contribution.find(params[:id])
     if @contribution.update_attributes(contribution_params)
-      redirect_to posted_contributions_url, notice: 'Contribution updated'
+      redirect_to contributions_url, notice: 'Contribution updated'
     else
       render action: 'edit'
     end
   end
 
   def destroy
-    @contribution = PostedContribution.find(params[:id])
+    @contribution = Contribution.find(params[:id])
     @contribution.destroy
-    redirect_to posted_contributions_url
+    redirect_to contributions_url
   end
 
   private
 
   def contribution_params
-    if params[:posted_contribution][:date]
-      params[:posted_contribution][:date] =
-        Chronic.parse(params[:posted_contribution][:date])
+    if params[:contribution][:date]
+      params[:contribution][:date] =
+        Chronic.parse(params[:contribution][:date])
     end
-    params.require(:posted_contribution).permit(:amount, :date,
+    params.require(:contribution).permit(:amount, :date,
       :contributor_id, :reference, :payment_type, :status)
   end
 

@@ -2,7 +2,7 @@ class BatchReport < Prawn::Document
 
   def initialize(batch)
     super()
-    @batch = batch
+    @batch = batch.decorate
     create_report
   end
 
@@ -13,18 +13,18 @@ class BatchReport < Prawn::Document
 
   def title
     move_down inches_to_pdf_points(0.25)
-    text "Batch #{@batch.id}, Posted #{@batch.posted_at_string}", size: 14, align: :center, style: :bold
+    text "#{@batch.title}, Posted #{@batch.created_at_string}", size: 14, align: :center, style: :bold
   end
 
-  def contributions 
+  def contributions
     move_down 15
     data = Array.new
     data << contributions_table_headings
-    @batch.contributions.order('date, id').each do |contribution|
+    @batch.contributions.order('date, id').decorate.each do |contribution|
       data << contribution_to_array(contribution)
     end
     total_contributions = number_to_currency(@batch.total_contributions)
-    data << [ { content: 'Total', colspan: 4 }, total_contributions ]  
+    data << [ { content: 'Total', colspan: 4 }, total_contributions ]
     table(data) do |table|
       table.cells.size = 10
       table.cells.padding_left = 10
@@ -40,7 +40,7 @@ class BatchReport < Prawn::Document
   end
 
   def contributions_table_headings
-    [ 'Contributor', 
+    [ 'Contributor',
       'Date',
       'Type',
       'Reference',

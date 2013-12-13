@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :require_admin_or_no_admins, only: [:new]
+  before_action :require_admin_or_no_admins
 
   def index
     @users = User.all
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    if no_admins
+    if no_admins?
       render :setup
     else
       render :new
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
         redirect_to login_url, :notice => "Your account was created. Please login to continue."
       end
     else
-      if no_admins
+      if no_admins?
         render :setup
       else
         render :new
@@ -51,15 +51,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def require_admin_or_no_admins
-    unless no_admins
-      require_login
-      unless current_user_is_admin
-        redirect_to root_url, notice: 'Only admins are allowed to manage users'
-      end
-    end
-  end
-
   def destroy
     @user = User.find(params[:id])
     if current_user.id == @user.id
@@ -76,6 +67,17 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :password,
       :password_confirmation, :user_type)
+  end
+
+  def require_admin_or_no_admins
+    require_admin unless no_admins?
+  end
+
+  def require_admin
+    require_login and return
+    unless current_user_is_admin?
+      redirect_to root_url, notice: 'Only admins are allowed to manage users'
+    end
   end
 
 end

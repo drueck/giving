@@ -1,0 +1,6 @@
+%h1 New Batch
+
+= simple_form_for @batch do |f|
+  = f.input :name, label: "Name (Optional)", input_html: { autofocus: "autofocus" }
+  = f.button :submit, 'Begin', class: "btn btn-default"
+  = link_to 'Cancel', batches_path, class: "btn btn-default"

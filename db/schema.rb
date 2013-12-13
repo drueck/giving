@@ -11,24 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131211065057) do
+ActiveRecord::Schema.define(version: 20131213110047) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "batches", force: true do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "posted_at",  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "name"
+    t.string   "status",     default: "Posted", null: false
   end
 
   create_table "contributions", force: true do |t|
-    t.integer  "contributor_id",             null: false
-    t.date     "date",                       null: false
+    t.integer  "contributor_id",                    null: false
+    t.date     "date",                              null: false
     t.string   "payment_type"
     t.string   "reference"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "status"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "status",         default: "Posted", null: false
     t.integer  "batch_id"
-    t.integer  "amount_cents",   default: 0, null: false
+    t.integer  "amount_cents",   default: 0,        null: false
   end
 
   create_table "contributors", force: true do |t|

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Organization do
 
   describe '#address_lines' do
-  
+
     context 'with all fields filled out' do
 
       before do
@@ -34,7 +34,7 @@ describe Organization do
 
       end
 
-    end  
+    end
 
     context 'with none of the fields filled out' do
 
