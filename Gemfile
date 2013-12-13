@@ -32,3 +32,5 @@ gem 'prawn', '~> 1.0.0.rc2'
 gem 'figaro'
 gem 'money-rails'
 gem 'draper', '~> 1.3.0'
+
+gem 'rails_12factor', group: :production
