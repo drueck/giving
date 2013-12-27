@@ -24,9 +24,6 @@ class BatchContributionsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     if @contribution.update(contribution_params)
       redirect_to batch_contributions_path(@batch)
@@ -68,7 +65,6 @@ class BatchContributionsController < ApplicationController
   def create_js
     if @contribution.save
       setup_for_index
-      render :create
     else
       render :refresh_form
     end
