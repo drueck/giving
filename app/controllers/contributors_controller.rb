@@ -1,6 +1,6 @@
 class ContributorsController < ApplicationController
 
-  before_filter :require_login
+  before_action :require_login
 
   def index
     @contributors = Contributor.name_search(params[:query])
