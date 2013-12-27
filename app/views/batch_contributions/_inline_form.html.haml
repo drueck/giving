@@ -1,0 +1,32 @@
+= simple_form_for [@batch, @contribution], remote: true do |f|
+  .row
+    .col-md-2
+      = f.input :contributor_id, required: true do
+        %input#contributor-name.form-control{ type: "text", name: "contributor_name", autofocus: "autofocus",
+          value: (@contribution.contributor ? @contribution.contributor.name : '') }
+        %input#contribution_contributor_id.required{type: "hidden", name: "contribution[contributor_id]",
+          value: (@contribution.contributor ? @contribution.contributor.id : '') }
+
+      :javascript
+        var contributors = #{ Contributor.all.map { |c| { id: c.id, name: c.name } }.to_json.html_safe };
+        $('#contributor-name').typeahead({
+          source: contributors,
+          itemSelected: function(item, val, text) {
+            $('#contribution_contributor_id').val(parseInt(val, 10));
+          }
+        });
+
+    .col-md-2
+      = f.input :date, as: :string, label: 'Date',
+        input_html: { value: @contribution.date_string, class: 'datepicker' }
+    .col-md-2
+      = f.input :amount
+    .col-md-2
+      = f.input :payment_type, label: 'Payment Type',
+        collection: [ 'Check', 'Cash', 'Other' ], selected: 'Check'
+    .col-md-2
+      = f.input :reference
+    .col-md-2
+      .form-group
+        %label.control-label &nbsp;
+        = f.button :submit, 'Add', :class => 'btn-default form-control'

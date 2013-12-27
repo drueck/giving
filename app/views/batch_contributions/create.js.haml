@@ -1,0 +1,9 @@
+:plain
+  $("#contributions-inline-form").html("#{ escape_javascript(render("inline_form")) }");
+  $(".datepicker").datepicker({
+    autoclose: true,
+    format: "mm/dd/yyyy",
+    todayHighlight: true
+  });
+  $("#contributions").html("#{ escape_javascript(render("contributions")) }");
+  $("#total-contributions").html("#{ escape_javascript(number_to_currency(@batch.total_contributions)) }");

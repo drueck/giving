@@ -1,0 +1,13 @@
+%h1
+  =@batch.title
+  %small Created #{@batch.created_at_string}
+#contributions-inline-form
+  = render "inline_form"
+#contributions.thick-top-margin
+  = render 'contributions'
+%p.total-contributions
+  Total:
+  %span#total-contributions= number_to_currency(@batch.total_contributions)
+= link_to 'Batch Report PDF', batch_path(@batch, format: :pdf, d: 'inline'), class: 'btn btn-default'
+= link_to 'Delete', batch_path(@batch), method: :delete,
+  data: { confirm: 'Are you sure?' }, class: 'btn btn-default'

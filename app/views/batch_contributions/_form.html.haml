@@ -1,0 +1,31 @@
+= simple_form_for [@contribution.batch, @contribution] do |f|
+
+  = f.input :contributor_id, required: true do
+    %input#contributor-name.form-control{type: "text", autofocus: "autofocus",
+      value: (@contribution.contributor ? @contribution.contributor.name : "")}
+    %input#contribution_contributor_id{ type: "hidden", name: "contribution[contributor_id]",
+      value: (@contribution.contributor ? @contribution.contributor.id : "")}
+
+  :javascript
+    var contributors = #{Contributor.all.map { |c| { id: c.id, name: c.name } }.to_json.html_safe };
+    $("#contributor-name").typeahead({
+      source: contributors,
+      itemSelected: function(item, val, text) {
+        $("#contribution_contributor_id").val(parseInt(val, 10));
+      }
+    });
+
+  = f.input :date, as: :string, label: "Date",
+    input_html: { value: @contribution.date_string, class: "datepicker" }
+  = f.input :amount
+  = f.input :payment_type, label: "Payment Type", collection: [ "Check", "Cash", "Other" ], selected: "Check"
+  = f.input :reference
+  .buttons
+    = f.button :submit, "Save", class: "btn btn-default"
+    = link_to "Cancel", batch_contributions_path(@batch), class: "btn btn-default"
+    - if @contribution.id
+      = link_to "Delete", batch_contribution_path(@batch, @contribution),
+        method: :delete,
+        data: { confirm: "Are you sure?" },
+        class: "btn btn-default"
+
