@@ -1,7 +1,7 @@
-$("#contributions-inline-form").html("<%= escape_javascript(render 'shared/inline_form'); %>");
+$("#contributions-inline-form").html("<%= escape_javascript(render 'inline_form'); %>");
 $('.datepicker').datepicker({
   autoclose: true,
   format: 'mm/dd/yyyy',
   todayHighlight: true
 });
-$('#contributions').html("<%= escape_javascript(render("shared/contributions")) %>");
+$('#contributions').html("<%= escape_javascript(render("contributions")) %>");
