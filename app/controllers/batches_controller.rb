@@ -1,6 +1,6 @@
 class BatchesController < ApplicationController
 
-	before_filter :require_login
+	before_action :require_login
 
   def index
     @batches = Batch.all.order('created_at desc')
@@ -15,19 +15,12 @@ class BatchesController < ApplicationController
   def create
     @batch = Batch.new(batch_params)
     @batch.save
-    redirect_to batch_path(@batch)
+    redirect_to batch_contributions_path(@batch)
   end
 
   def show
     @batch = Batch.find(params[:id]).decorate
-    @contribution = Contribution.new(batch_id: @batch.id).decorate
-    @contribution.date = last_date(@batch)
-    @contributions = @batch.contributions.order('date desc, id desc')
-      .paginate(page: params[:page], per_page: 10)
-      .decorate
     respond_to do |format|
-      format.html
-      format.js
       format.pdf {
         pdf = BatchReport.new(@batch)
         options = {
