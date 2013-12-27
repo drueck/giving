@@ -10,7 +10,7 @@
     <tbody>
       <% @batches.each do |batch| %>
         <tr>
-          <td><%= link_to batch.title, batch_path(batch) %></td>
+          <td><%= link_to batch.title, batch_contributions_path(batch) %></td>
           <td><%= batch.created_at_string %></td>
           <td><%= number_to_currency(batch.total_contributions) %></td>
         </tr>
