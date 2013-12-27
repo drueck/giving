@@ -1,60 +1,30 @@
 class ContributionsController < ApplicationController
 
   before_action :require_login
+  before_action :find_contribution, only: [:edit, :update, :destroy]
+  before_action :save_requesting_page, only: [:new, :edit]
 
   def index
-    @contributions = Contribution
-      .order('date desc, id desc')
-      .paginate(page: params[:page], per_page: 10)
-      .decorate
-    @contribution = Contribution.new.decorate
+    setup_for_index
     respond_to do |format|
       format.html
       format.js
     end
   end
 
-  def show
-    @contribution = Contribution.find(params[:id]).decorate
-  end
-
   def new
-    @contribution = Contribution.new
-    save_requesting_page
+    @contribution = Contribution.new.decorate
   end
 
   def create
-    contribution_to_create = Contribution.new(contribution_params).decorate
-    if contribution_to_create.save
-      respond_to do |format|
-        format.html { redirect_to last_contributions_page, notice: 'Contribution saved' }
-        format.js do
-          @contributions = Contribution.order('date desc, id desc')
-          @contribution = Contribution.new.decorate
-          if contribution_to_create.batch_id
-            batch_id = contribution_to_create.batch_id
-            @contributions = @contributions.where(batch_id: batch_id)
-            @contribution.batch_id = batch_id
-          end
-          @contributions = @contributions.paginate(page: 1, per_page: 10).decorate
-        end
-      end
-    else
-      @contribution = contribution_to_create
-      respond_to do |format|
-        format.html { render action: 'new' }
-        format.js { render 'refresh_form' }
-      end
+    @contribution = Contribution.new(contribution_params).decorate
+    respond_to do |format|
+      format.html { create_html }
+      format.js { create_js }
     end
   end
 
-  def edit
-    @contribution = Contribution.find(params[:id]).decorate
-    save_requesting_page
-  end
-
   def update
-    @contribution = Contribution.find(params[:id]).decorate
     if @contribution.update_attributes(contribution_params)
       redirect_to last_contributions_page, notice: 'Contribution updated'
     else
@@ -63,12 +33,39 @@ class ContributionsController < ApplicationController
   end
 
   def destroy
-    @contribution = Contribution.find(params[:id])
-    @contribution.destroy
+    @contribution.mark_deleted
     redirect_to contributions_url
   end
 
   private
+
+  def setup_for_index
+    @contributions = Contribution
+      .order('date desc, id desc')
+      .paginate(page: params[:page], per_page: 10)
+      .decorate
+    @contribution = Contribution.new.decorate
+  end
+
+  def find_contribution
+    @contribution = Contribution.find(params[:id]).decorate
+  end
+
+  def create_html
+    if @contribution.save
+      redirect_to last_contributions_page, notice: 'Contribution saved'
+    else
+      render action: 'new'
+    end
+  end
+
+  def create_js
+    if @contribution.save
+      setup_for_index
+    else
+      render :refresh_form
+    end
+  end
 
   def save_requesting_page
     session[:contributions_came_from] = request.referrer
@@ -78,10 +75,14 @@ class ContributionsController < ApplicationController
     session[:contributions_came_from] || contributions_path
   end
 
-  def contribution_params
+  def parse_date_param
     if params[:contribution][:date]
       params[:contribution][:date] = Chronic.parse(params[:contribution][:date])
     end
+  end
+
+  def contribution_params
+    parse_date_param
     params.require(:contribution).permit(:amount, :date, :batch_id,
       :contributor_id, :reference, :payment_type, :status)
   end
