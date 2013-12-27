@@ -19,8 +19,9 @@ group :test, :development do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'guard-rspec', '~> 4.2.0'
   gem 'listen', '~> 2.0'
-	gem 'rb-readline', '~> 0.4.2'
 end
+
+gem 'simplecov', require: false, group: :test
 
 gem 'jquery-rails'
 gem 'simple_form', '~> 3.0.0'
