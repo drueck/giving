@@ -2,6 +2,37 @@ require 'spec_helper'
 
 describe Contributor do
 
+  describe "#name_search" do
+    before(:each) do
+      @contributor = FactoryGirl.create(:contributor, first_name: "abc d efg",
+        last_name: "hi jk", name: "lmno")
+      expect(@contributor).to be_persisted
+    end
+    context "when the query is empty" do
+      it "should return all contributors" do
+        expect(described_class.name_search("")).to include(@contributor)
+      end
+    end
+    context "when a contributor's first name matches any full words from the query string" do
+      it "should return that contributor among the results" do
+        expect(described_class.name_search("abc efg")).to include(@contributor)
+        expect(described_class.name_search("ab")).not_to include(@contributor)
+      end
+    end
+    context "when a contributor's last name matches any full words from the query string" do
+      it "should return that contributor among the results" do
+        expect(described_class.name_search("hi")).to include(@contributor)
+        expect(described_class.name_search("j")).not_to include(@contributor)
+      end
+    end
+    context "when a contributor's (full) name matches any full words from the query string" do
+      it "should return that contributor among the results" do
+        expect(described_class.name_search("lmno")).to include(@contributor)
+        expect(described_class.name_search("mn")).not_to include(@contributor)
+      end
+    end
+  end
+
   describe "#mark_deleted" do
 
     before do

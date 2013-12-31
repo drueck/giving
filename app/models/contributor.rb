@@ -14,7 +14,7 @@ class Contributor < ActiveRecord::Base
 
   def self.name_search(query)
     if query.present?
-      where("name @@ :q", q: query)
+      where("name @@ :q or first_name @@ :q or last_name @@ :q", q: query)
     else
       all
     end

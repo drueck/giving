@@ -58,7 +58,7 @@ class ContributorsController < ApplicationController
 
   def contributor_params
     params.require(:contributor).permit(:address, :city, :state, :zip,
-      :name, :phone, :email, :notes)
+      :name, :phone, :email, :notes, :first_name, :last_name)
   end
 
   def page_of_contributions(contributor)
