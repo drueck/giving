@@ -11,6 +11,7 @@ class ContributionsController < ApplicationController
     respond_to do |format|
       format.html
       format.js
+      format.csv { send_data ContributionCSV.new.generate }
     end
   end
 

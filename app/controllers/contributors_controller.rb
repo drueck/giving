@@ -9,6 +9,7 @@ class ContributorsController < ApplicationController
     respond_to do |format|
       format.html
       format.js
+      format.csv { send_data ContributorCSV.new.generate }
     end
   end
 
