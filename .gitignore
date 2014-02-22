@@ -28,3 +28,6 @@ config/database.yml
 
 # simplecov results
 coverage
+
+# sandi_meter results
+sandi_meter
