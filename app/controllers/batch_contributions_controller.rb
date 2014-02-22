@@ -6,12 +6,11 @@ class BatchContributionsController < ApplicationController
   before_action :find_batch
   before_action :find_contribution, only: [:edit, :update, :destroy]
 
+  respond_to :html, :js
+
   def index
     setup_for_index
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    respond_with @contributions
   end
 
   def new
