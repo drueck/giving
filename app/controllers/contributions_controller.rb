@@ -1,5 +1,7 @@
 class ContributionsController < ApplicationController
 
+  include DateParsing
+
   before_action :require_login
   before_action :find_contribution, only: [:edit, :update, :destroy]
   before_action :save_requesting_page, only: [:new, :edit]
@@ -75,14 +77,8 @@ class ContributionsController < ApplicationController
     session[:contributions_came_from] || contributions_path
   end
 
-  def parse_date_param
-    if params[:contribution][:date]
-      params[:contribution][:date] = Chronic.parse(params[:contribution][:date])
-    end
-  end
-
   def contribution_params
-    parse_date_param
+    normalize_date_param!
     params.require(:contribution).permit(:amount, :date, :batch_id,
       :contributor_id, :reference, :payment_type, :status)
   end

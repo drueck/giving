@@ -1,5 +1,7 @@
 class BatchContributionsController < ApplicationController
 
+  include DateParsing
+
 	before_action :require_login
   before_action :find_batch
   before_action :find_contribution, only: [:edit, :update, :destroy]
@@ -75,15 +77,9 @@ class BatchContributionsController < ApplicationController
   end
 
   def contribution_params
-    parse_date_param
+    normalize_date_param!
     params.require(:contribution).permit(:amount, :date, :contributor_id,
       :reference, :payment_type)
-  end
-
-  def parse_date_param
-    if params[:contribution][:date]
-      params[:contribution][:date] = Chronic.parse(params[:contribution][:date])
-    end
   end
 
   def pagination_params
