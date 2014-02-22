@@ -9,12 +9,5 @@
         %th Reference
         %th Amount
     %tbody
-      - @contributions.each do |contribution|
-        %tr
-          %td= link_to 'Edit', edit_batch_contribution_path(contribution.batch, contribution)
-          %td= link_to contribution.contributor.name, edit_contributor_path(contribution.contributor)
-          %td= contribution.date_string
-          %td= contribution.payment_type
-          %td= contribution.reference
-          %td= number_to_currency(contribution.amount)
+      = render @contributions
   = will_paginate @contributions

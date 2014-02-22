@@ -11,16 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @contributions.each do |contribution| %>
-        <tr>
-          <td><%= link_to 'Edit', edit_contribution_path(contribution) %></td>
-          <td><%= link_to contribution.contributor.name, edit_contributor_path(contribution.contributor) %></td>
-          <td><%= contribution.date_string %></td>
-          <td><%= contribution.payment_type %></td>
-          <td><%= contribution.reference %></td>
-          <td><%= number_to_currency(contribution.amount) %></td>
-        </tr>
-      <% end %>
+      <%= render @contributions %>
     </tbody>
   </table>
   <%= will_paginate @contributions %>
