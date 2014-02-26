@@ -12,7 +12,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'haml-rails', '~> 0.5.2'
 gem 'therubyracer', :platforms => :ruby
 gem 'uglifier', '>= 1.0.3'
-gem 'bootstrap-sass', '~> 3.0.2.0'
+gem 'bootstrap-sass', '~> 3.1.1'
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.14.0'
