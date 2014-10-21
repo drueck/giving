@@ -36,7 +36,7 @@ describe Contributor do
   describe "#mark_deleted" do
 
     before do
-      @contributor = described_class.new
+      @contributor = FactoryGirl.create(:contributor)
       @contributor.contributions << FactoryGirl.build(:contribution)
       @contributor.mark_deleted
     end
