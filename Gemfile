@@ -35,7 +35,6 @@ gem 'will_paginate', '~> 3.0.5'
 gem 'sorcery', '~> 0.8.6'
 
 gem 'prawn', '~> 1.3.0'
-gem 'figaro', '~> 1.0.0'
 gem 'money-rails', '~> 0.12.0'
 gem 'draper', '~> 1.4.0'
 
