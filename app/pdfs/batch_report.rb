@@ -1,3 +1,5 @@
+require "prawn/measurement_extensions"
+
 class BatchReport < Prawn::Document
 
   def initialize(batch)
@@ -9,10 +11,11 @@ class BatchReport < Prawn::Document
   def create_report
     title
     contributions
+    notes
   end
 
   def title
-    move_down inches_to_pdf_points(0.25)
+    move_down 0.25.in
     text "#{@batch.title}, Posted #{@batch.created_at_string}", size: 14, align: :center, style: :bold
   end
 
@@ -31,12 +34,21 @@ class BatchReport < Prawn::Document
       table.cells.padding_right = 10
       table.cells.border_width = 0
       table.column(4).align = :right
+      table.column(0).padding_left = 0
+      table.column(4).padding_right = 0
       table.row(0).font_style = :bold
       table.row(-1).font_style = :bold
       table.row(-1).padding_top = 10
       table.position = :center
-      table.width = inches_to_pdf_points(7)
+      table.width = 7.5.in
     end
+  end
+
+  def notes
+    move_down 0.25.in
+    text "Notes", size: 10, style: :bold
+    move_down 0.1.in
+    text @batch.notes, size: 10
   end
 
   def contributions_table_headings
@@ -59,10 +71,5 @@ class BatchReport < Prawn::Document
     helper = Object.new.extend(ActionView::Helpers::NumberHelper)
     helper.number_to_currency(number)
   end
-
-  def inches_to_pdf_points(inches)
-    inches * 72
-  end
-  protected :inches_to_pdf_points
 
 end
