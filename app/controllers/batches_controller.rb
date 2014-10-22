@@ -13,26 +13,24 @@ class BatchesController < ApplicationController
   end
 
   def create
-    @batch = Batch.new(batch_params)
-    @batch.save
+    @batch = Batch.create(batch_params)
     redirect_to batch_contributions_path(@batch)
   end
 
   def show
+    batch = Batch.find(params[:id]).decorate
+    pdf = BatchReport.new(batch)
+    send_data pdf.render, pdf_options(batch)
+  end
+
+  def edit
     @batch = Batch.find(params[:id]).decorate
-    respond_to do |format|
-      format.pdf {
-        pdf = BatchReport.new(@batch)
-        options = {
-          filename: "batch-#{@batch.id}.pdf",
-          type: "application/pdf"
-        }
-        if(params[:d] == 'inline')
-          options.store(:disposition, 'inline')
-        end
-        send_data pdf.render, options
-      }
-    end
+  end
+
+  def update
+    @batch = Batch.find(params[:id])
+    @batch.update(batch_params)
+    redirect_to batch_contributions_path(@batch)
   end
 
   def destroy
@@ -44,11 +42,21 @@ class BatchesController < ApplicationController
   private
 
   def batch_params
-    params.require(:batch).permit(:name)
+    params.require(:batch).permit(:name, :notes)
   end
 
   def last_date(batch)
     batch.contributions.last.try(:date)
+  end
+
+  def pdf_options(batch)
+    { filename: "batch-#{batch.id}.pdf",
+      type: "application/pdf",
+      disposition: pdf_disposition }
+  end
+
+  def pdf_disposition
+    params[:d] == 'inline' ? 'inline' : 'attachment'
   end
 
 end

@@ -1,0 +1,7 @@
+%h1 Edit #{@batch.title}
+
+= simple_form_for @batch do |f|
+  = f.input :name, label: "Name", input_html: { autofocus: "autofocus" }
+  = f.input :notes
+  = f.button :submit, 'Update', class: "btn btn-default"
+  = link_to 'Cancel', batch_contributions_path(@batch), class: "btn btn-default"
