@@ -54,11 +54,11 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if current_user.id == @user.id
-      flash.now[:notice] << 'Cannot delete current user'
+      flash.now[:alert] << 'Cannot delete current user'
       render :edit
     else
       @user.destroy
-      redirect_to users_url, notice: 'User deleted'
+      redirect_to users_url
     end
   end
 
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
   def require_admin
     require_login and return
     unless current_user_is_admin?
-      redirect_to root_url, notice: 'Only admins are allowed to manage users'
+      redirect_to root_url, alert: 'Only admins are allowed to manage users'
     end
   end
 

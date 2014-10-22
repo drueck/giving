@@ -29,7 +29,7 @@ class ContributionsController < ApplicationController
 
   def update
     if @contribution.update_attributes(contribution_params)
-      redirect_to last_contributions_page, notice: 'Contribution updated'
+      redirect_to last_contributions_page
     else
       render action: 'edit'
     end
@@ -56,7 +56,7 @@ class ContributionsController < ApplicationController
 
   def create_html
     if @contribution.save
-      redirect_to last_contributions_page, notice: 'Contribution saved'
+      redirect_to last_contributions_page
     else
       render action: 'new'
     end

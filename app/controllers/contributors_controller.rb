@@ -24,7 +24,7 @@ class ContributorsController < ApplicationController
   def create
     @contributor = Contributor.new(contributor_params)
     if @contributor.save
-      redirect_to contributors_url, notice: 'Successfully added new contributor'
+      redirect_to contributors_url
     else
       render action: "new"
     end
@@ -42,7 +42,7 @@ class ContributorsController < ApplicationController
   def update
     @contributor = Contributor.find(params[:id])
     if @contributor.update_attributes(contributor_params)
-      redirect_to contributors_url, notice: 'Successfully updated contributor info'
+      redirect_to contributors_url
     else
       @contributions = page_of_contributions(@contributor)
       render action: 'edit'

@@ -38,7 +38,7 @@ class BatchesController < ApplicationController
   def destroy
     batch = Batch.find(params[:id]).decorate
     batch.mark_deleted
-    redirect_to batches_path, notice: "#{batch.title} has been marked as deleted"
+    redirect_to batches_path
   end
 
   private
