@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.maskedinput
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require bootstrap-typeahead
 //= require mousetrap.min
+//= require moment
 //= require_tree .

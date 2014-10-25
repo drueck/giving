@@ -48,7 +48,11 @@
 		if(this.component && this.component.length === 0)
 			this.component = false;
 
-		this.forceParse = true;
+    // changing the default because it seems like even though i set the option
+    // in the initializer it's not honoring my choice for some reason - david
+		// this.forceParse = true;
+		this.forceParse = false;
+    // end david's change
 		if ('forceParse' in options) {
 			this.forceParse = options.forceParse;
 		} else if ('dateForceParse' in this.element.data()) {
