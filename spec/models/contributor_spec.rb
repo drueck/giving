@@ -2,6 +2,20 @@ require 'spec_helper'
 
 describe Contributor do
 
+  describe "#valid?" do
+    it "dissallows duplicate names for active contributors" do
+      active_joe = Contributor.create(name: "Joe", status: "Active")
+      new_joe = Contributor.new(name: "Joe")
+      expect(new_joe.valid?).to be_false
+      expect(new_joe.errors[:name]).not_to be_empty
+    end
+    it "allows duplicate contributor names if the duplicates have been deleted" do
+      deleted_joe = Contributor.create(name: "Joe", status: "Deleted")
+      new_joe = Contributor.new(name: "Joe")
+      expect(new_joe.valid?).to be_true
+    end
+  end
+
   describe "#name_search" do
     before(:each) do
       @contributor = FactoryGirl.create(:contributor, first_name: "abc d efg",

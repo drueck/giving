@@ -7,6 +7,7 @@ class Contributor < ActiveRecord::Base
   has_many :contributions, dependent: :destroy
 
   validates :name, presence: true
+  validate :name_is_unique_among_active_contributors
 
   def <=>(other)
     name <=> other.name
@@ -37,6 +38,13 @@ class Contributor < ActiveRecord::Base
   def mark_contributions_deleted
     contributions.each do |c|
       c.mark_deleted
+    end
+  end
+
+  def name_is_unique_among_active_contributors
+    other = Contributor.find_by(name: name)
+    if other && other.id != id
+      errors.add(:name, "has been taken")
     end
   end
 
