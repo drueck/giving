@@ -18,4 +18,5 @@
 //= require bootstrap-typeahead
 //= require mousetrap.min
 //= require moment
+//= require sweet-alert
 //= require_tree .
