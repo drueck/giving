@@ -1,4 +1,9 @@
 $ ->
+  initDateFields()
+  window.Giving = window.Giving || {}
+  window.Giving.initDateFields = initDateFields
+
+initDateFields = ->
   $('.datepicker').mask('99/99?/9999', { placeholder: ' ' })
   $('.datepicker').datepicker(
     autoclose: true,
