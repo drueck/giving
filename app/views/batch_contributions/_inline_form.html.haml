@@ -1,20 +1,7 @@
 = simple_form_for [@batch, @contribution], remote: true do |f|
   .row
     .col-md-2
-      = f.input :contributor_id, required: true do
-        %input#contributor-name.form-control{ type: "text", name: "contributor_name", autofocus: "autofocus",
-          value: (@contribution.contributor ? @contribution.contributor.name : '') }
-        %input#contribution_contributor_id.required{type: "hidden", name: "contribution[contributor_id]",
-          value: (@contribution.contributor ? @contribution.contributor.id : '') }
-
-      :javascript
-        var contributors = #{ Contributor.all.map { |c| { id: c.id, name: c.name } }.to_json.html_safe };
-        $('#contributor-name').typeahead({
-          source: contributors,
-          itemSelected: function(item, val, text) {
-            $('#contribution_contributor_id').val(parseInt(val, 10));
-          }
-        });
+      = render partial: 'shared/contributor_select', locals: { f: f }
 
     .col-md-2
       = f.input :date, as: :string, label: 'Date',

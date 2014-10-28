@@ -1,4 +1,5 @@
 :plain
   $("#contributions-inline-form").html("#{ escape_javascript(render 'inline_form'); }");
   Giving.initDateFields();
+  Giving.initContributorSelect();
   $("#contributor-name").focus();

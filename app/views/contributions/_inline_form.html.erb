@@ -3,21 +3,7 @@
     <%= f.input :status, as: :hidden %>
     <%= f.input :batch_id, as: :hidden %>
     <div class="col-md-2">
-      <%= f.input :contributor_id, required: true do %>
-        <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus" class="form-control"
-          value="<%= (@contribution.contributor ? @contribution.contributor.name : '') %>" />
-        <input type="hidden" class="required" id="contribution_contributor_id" name="contribution[contributor_id]"
-          value="<%= (@contribution.contributor ? @contribution.contributor.id : '') %>" />
-      <% end %>
-      <script type="text/javascript">
-        var contributors = <%= Contributor.all.map { |c| { id: c.id, name: c.name } }.to_json.html_safe %>;
-        $('#contributor-name').typeahead({
-          source: contributors,
-          itemSelected: function(item, val, text) {
-            $('#contribution_contributor_id').val(parseInt(val, 10));
-          }
-        });
-      </script>
+      <%= render partial: 'shared/contributor_select', locals: { f: f } %>
     </div>
     <div class="col-md-2">
       <%= f.input :date, as: :string, label: 'Date',

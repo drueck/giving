@@ -1,19 +1,6 @@
 = simple_form_for [@contribution.batch, @contribution] do |f|
 
-  = f.input :contributor_id, required: true do
-    %input#contributor-name.form-control{type: "text", autofocus: "autofocus",
-      value: (@contribution.contributor ? @contribution.contributor.name : "")}
-    %input#contribution_contributor_id{ type: "hidden", name: "contribution[contributor_id]",
-      value: (@contribution.contributor ? @contribution.contributor.id : "")}
-
-  :javascript
-    var contributors = #{Contributor.all.map { |c| { id: c.id, name: c.name } }.to_json.html_safe };
-    $("#contributor-name").typeahead({
-      source: contributors,
-      itemSelected: function(item, val, text) {
-        $("#contribution_contributor_id").val(parseInt(val, 10));
-      }
-    });
+  = render partial: 'shared/contributor_select', locals: { f: f }
 
   = f.input :date, as: :string, label: "Date",
     input_html: { value: @contribution.date_string, class: "datepicker" }

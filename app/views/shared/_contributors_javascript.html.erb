@@ -1,0 +1,4 @@
+<script type="text/javascript">
+  window.Giving = window.Giving || {};
+  window.Giving.contributors = <%= raw Contributor.all.map { |c| { id: c.id, name: c.name } }.to_json %>;
+</script>

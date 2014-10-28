@@ -1,4 +1,5 @@
 $("#contributions-inline-form").html("<%= escape_javascript(render 'inline_form'); %>");
 $('#contributions').html("<%= escape_javascript(render("contributions")) %>");
 Giving.initDateFields();
+Giving.initContributorSelect();
 $("#contributor-name").focus();

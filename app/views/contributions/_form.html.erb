@@ -1,21 +1,6 @@
 <%= simple_form_for @contribution do |f| %>
 
-  <%= f.input :contributor_id, required: true do %>
-    <input type="text" id="contributor-name" name="contributor_name" autofocus="autofocus" class="form-control"
-      value="<%= (@contribution.contributor ? @contribution.contributor.name : '') %>" />
-    <input type="hidden" class="required" id="contribution_contributor_id" name="contribution[contributor_id]"
-      value="<%= (@contribution.contributor ? @contribution.contributor.id : '') %>" />
-  <% end %>
-
-  <script type="text/javascript">
-    var contributors = <%= Contributor.all.map { |c| { id: c.id, name: c.name } }.to_json.html_safe %>;
-    $('#contributor-name').typeahead({
-      source: contributors,
-      itemSelected: function(item, val, text) {
-        $('#contribution_contributor_id').val(parseInt(val, 10));
-      }
-    });
-  </script>
+  <%= render partial: 'shared/contributor_select', locals: { f: f } %>
 
   <%= f.input :date, as: :string, label: 'Date',
     input_html: { value: @contribution.date_string, class: 'datepicker' } %>
