@@ -7,12 +7,12 @@ describe ContributionsController do
   end
 
   describe "#index" do
+    let(:contribution) { create(:contribution) }
     before(:each) do
-      @contribution = FactoryGirl.create(:contribution)
       get :index
     end
     it "should assign a page of decorated contributions to @contributions" do
-      expect(assigns(:contributions)).to include(@contribution)
+      expect(assigns(:contributions)).to include(contribution)
     end
     it "should assign a new contribution for the inline form to @contribution" do
       expect(assigns(:contribution)).to be_a_kind_of(Contribution)
@@ -45,28 +45,26 @@ describe ContributionsController do
 
   describe "#create" do
     context "when the required attributes are supplied" do
-      before(:each) do
-        @contributor = FactoryGirl.create(:contributor)
-        @attrs = { contributor_id: @contributor.id, amount: 9.99,
-          date: "12/1/2013" }
-      end
+      let(:contributor) { create(:contributor) }
+      let(:attrs) { { amount: 9.99, date: "12/1/2013" } }
       context "regardless of format requested" do
         it "should create the contribution" do
           expect {
-            post :create, contribution: @attrs
+            post :create, contributor_name: contributor.name, contribution: attrs
           }.to change(Contribution, :count).by(1)
-          expect(Contribution.last.contributor_id).to eq @contributor.id
+          expect(Contribution.last.contributor_id).to eq contributor.id
         end
       end
       context "when requesting html format" do
         it "should redirect to the contributions index" do
-          post :create, contribution: @attrs
+          post :create, contributor_name: contributor.name, contribution: attrs
           expect(response).to redirect_to(contributions_path)
         end
       end
       context "when requesting js format" do
         before(:each) do
-          post :create, contribution: @attrs, format: :js
+          post :create, contributor_name: contributor.name,
+            contribution: attrs, format: :js
         end
         it "should assign the first page of decorated contributions to @contributions" do
           expect(assigns(:contributions)).to include(Contribution.first)
@@ -117,12 +115,12 @@ describe ContributionsController do
   end
 
   describe "#edit" do
+    let(:contribution) { create(:contribution) }
     before(:each) do
-      @contribution = FactoryGirl.create(:contribution)
-      get :edit, id: @contribution.id
+      get :edit, id: contribution.id
     end
     it "should assign the decorated contribution to @contribution" do
-      expect(assigns(:contribution)).to eq @contribution
+      expect(assigns(:contribution)).to eq contribution
       expect(assigns(:contribution)).to be_decorated
     end
     context "with render views on" do
@@ -134,16 +132,14 @@ describe ContributionsController do
   end
 
   describe "#update" do
-    before(:each) do
-      @contribution = FactoryGirl.create(:contribution)
-    end
+    let(:contribution) { create(:contribution) }
+    let(:expected_amount) { rand(100.200) }
     context "when all of the required attributes are present and valid" do
       before(:each) do
-        @expected_amount = rand(100..200)
-        post :update, id: @contribution.id, contribution: { amount: @expected_amount }
+        post :update, id: contribution.id, contribution: { amount: expected_amount }
       end
       it "should update the contribution" do
-        expect(@contribution.reload.amount).to eq Money.new(@expected_amount * 100)
+        expect(contribution.reload.amount).to eq Money.new(expected_amount * 100)
       end
       it "should redirect to the batch index" do
         expect(response).to redirect_to(contributions_path)
@@ -151,13 +147,13 @@ describe ContributionsController do
     end
     context "when any required attributes are missing or invalid" do
       before(:each) do
-        post :update, id: @contribution.id, contribution: { amount: 0 }
+        post :update, id: contribution.id, contribution: { amount: 0 }
       end
       it "should not update the contribution" do
-        expect(@contribution.reload.amount).not_to eq Money.new(0)
+        expect(contribution.reload.amount).not_to eq Money.new(0)
       end
       it "should assign the decorated contribution with errors to @contribution" do
-        expect(assigns(:contribution)).to eq @contribution
+        expect(assigns(:contribution)).to eq contribution
         expect(assigns(:contribution)).to be_decorated
         expect(assigns(:contribution).errors).not_to be_empty
       end
@@ -171,12 +167,12 @@ describe ContributionsController do
   end
 
   describe "#destroy" do
+    let(:contribution) { create(:contribution) }
     before(:each) do
-      @contribution = FactoryGirl.create(:contribution)
-      delete :destroy, id: @contribution.id
+      delete :destroy, id: contribution.id
     end
     it "should mark the contribution as deleted" do
-      expect(Contribution.unscoped.find(@contribution.id).status).to eq "Deleted"
+      expect(Contribution.unscoped.find(contribution.id).status).to eq "Deleted"
     end
     it "should redirect to the batch contributions index" do
       expect(response).to redirect_to(contributions_path)

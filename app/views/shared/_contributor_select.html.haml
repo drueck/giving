@@ -1,6 +1,5 @@
 = f.input :contributor_id, required: true do
   %input#contributor-name.form-control{type: "text", autofocus: "autofocus",
+    name: "contributor_name",
     value: (@contribution.contributor ? @contribution.contributor.name : "")}
-  %input#contribution_contributor_id{ type: "hidden", name: "contribution[contributor_id]",
-    value: (@contribution.contributor ? @contribution.contributor.id : "")}
 = render partial: "shared/contributors_javascript"

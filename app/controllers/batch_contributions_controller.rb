@@ -77,8 +77,16 @@ class BatchContributionsController < ApplicationController
 
   def contribution_params
     normalize_date_param!
+    set_contributor_id_param!
     params.require(:contribution).permit(:amount, :date, :contributor_id,
       :reference, :payment_type)
+  end
+
+  def set_contributor_id_param!
+    if params[:contributor_name]
+      params[:contribution][:contributor_id] =
+        Contributor.find_by(name: params[:contributor_name]).try(:id)
+    end
   end
 
   def pagination_params

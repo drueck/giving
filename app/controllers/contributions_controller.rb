@@ -80,8 +80,16 @@ class ContributionsController < ApplicationController
 
   def contribution_params
     normalize_date_param!
+    set_contributor_id_param!
     params.require(:contribution).permit(:amount, :date, :batch_id,
       :contributor_id, :reference, :payment_type, :status)
+  end
+
+  def set_contributor_id_param!
+    if params[:contributor_name]
+      params[:contribution][:contributor_id] =
+        Contributor.find_by(name: params[:contributor_name]).try(:id)
+    end
   end
 
 end
