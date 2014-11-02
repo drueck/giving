@@ -11,6 +11,7 @@
 %h2 Notes
 %p.batch-notes= @batch.notes
 = link_to 'Edit Title & Notes', edit_batch_path(@batch), class: 'btn btn-default'
-= link_to 'Batch Report PDF', batch_path(@batch, format: :pdf, d: 'inline'), class: 'btn btn-default'
+= link_to 'Batch Report PDF', batch_path(@batch, format: :pdf, d: 'inline'),
+  class: 'btn btn-default', target: '_blank'
 = link_to 'Delete', batch_path(@batch), method: :delete,
   data: { confirm: 'Are you sure?' }, class: 'btn btn-default'
