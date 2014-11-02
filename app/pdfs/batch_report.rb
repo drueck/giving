@@ -21,14 +21,7 @@ class BatchReport < Prawn::Document
 
   def contributions
     move_down 15
-    data = Array.new
-    data << contributions_table_headings
-    @batch.contributions.order('date, id').decorate.each do |contribution|
-      data << contribution_to_array(contribution)
-    end
-    total_contributions = number_to_currency(@batch.total_contributions)
-    data << [ { content: 'Total', colspan: 4 }, total_contributions ]
-    table(data) do |table|
+    table(contributions_data) do |table|
       table.cells.size = 10
       table.cells.padding_left = 10
       table.cells.padding_right = 10
@@ -44,11 +37,10 @@ class BatchReport < Prawn::Document
     end
   end
 
-  def notes
-    move_down 0.25.in
-    text "Notes", size: 10, style: :bold
-    move_down 0.1.in
-    text @batch.notes, size: 10
+  def contributions_data
+    data = [ contributions_table_headings ]
+    data += contributions_table_body
+    data << contributions_table_totals
   end
 
   def contributions_table_headings
@@ -59,12 +51,30 @@ class BatchReport < Prawn::Document
       'Amount' ]
   end
 
+  def contributions_table_body
+    @batch.contributions.order('date, id').decorate.map { |contribution|
+      contribution_to_array(contribution)
+    }
+  end
+
+  def contributions_table_totals
+    total_contributions = number_to_currency(@batch.total_contributions)
+    [ { content: 'Total', colspan: 4 }, total_contributions ]
+  end
+
   def contribution_to_array(contribution)
     [ contribution.contributor.name,
       contribution.date_string,
       contribution.payment_type,
       contribution.reference,
       number_to_currency(contribution.amount) ]
+  end
+
+  def notes
+    move_down 0.25.in
+    text "Notes", size: 10, style: :bold
+    move_down 0.1.in
+    text @batch.notes, size: 10
   end
 
   def number_to_currency(number)
