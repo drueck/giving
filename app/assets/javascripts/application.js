@@ -16,7 +16,7 @@
 //= require lodash
 //= require bootstrap
 //= require bootstrap-datepicker
-//= require bootstrap-typeahead
+//= require bootstrap3-typeahead
 //= require mousetrap.min
 //= require moment
 //= require sweet-alert

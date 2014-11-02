@@ -7,7 +7,9 @@
     </div>
     <div class="col-md-2">
       <%= f.input :date, as: :string, label: 'Date',
-        input_html: { value: @contribution.date_string, class: 'datepicker' } %>
+        input_html: { value: @contribution.date_string,
+                      class: 'datepicker',
+                      id: 'contribution-date' } %>
     </div>
     <div class="col-md-2">
       <%= f.input :amount %>

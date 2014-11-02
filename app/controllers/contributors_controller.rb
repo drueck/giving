@@ -2,6 +2,9 @@ class ContributorsController < ApplicationController
 
   before_action :require_login
 
+  respond_to :html, only: [:create]
+  respond_to :json, only: [:create]
+
   def index
     @contributors = Contributor.name_search(params[:query])
       .order(:name)
@@ -22,21 +25,13 @@ class ContributorsController < ApplicationController
   end
 
   def create
-    @contributor = Contributor.new(contributor_params)
-    if @contributor.save
-      redirect_to contributors_url
-    else
-      render action: "new"
-    end
+    @contributor = Contributor.create(contributor_params)
+    respond_with @contributor, location: contributors_url
   end
 
   def edit
     @contributor = Contributor.find(params[:id])
     @contributions = page_of_contributions(@contributor)
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def update
