@@ -1,6 +1,7 @@
 class BatchContributionsController < ApplicationController
 
   include DateParsing
+  include ContributorParamTranslation
 
 	before_action :require_login
   before_action :find_batch
@@ -80,13 +81,6 @@ class BatchContributionsController < ApplicationController
     set_contributor_id_param!
     params.require(:contribution).permit(:amount, :date, :contributor_id,
       :reference, :payment_type)
-  end
-
-  def set_contributor_id_param!
-    if params[:contributor_name]
-      params[:contribution][:contributor_id] =
-        Contributor.find_by(name: params[:contributor_name]).try(:id)
-    end
   end
 
   def pagination_params
