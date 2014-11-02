@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.maskedinput
+//= require lodash
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require bootstrap-typeahead

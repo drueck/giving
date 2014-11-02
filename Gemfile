@@ -29,6 +29,7 @@ end
 gem 'simplecov', '~> 0.9.1', require: false, group: :test
 
 gem 'jquery-rails', '~> 3.1.2'
+gem 'lodash-rails', '~> 2.4.1'
 gem 'simple_form', '~> 3.0.0'
 gem 'chronic', '~> 0.10.2'
 gem 'will_paginate', '~> 3.0.5'
