@@ -41,7 +41,7 @@ initWatchForNewContributor = ->
 knownContributor = (name) ->
   lowerCaseName = name.toLowerCase()
   _.find Giving.contributors, (name) ->
-    name.toLowerCase() == lowerCaseName
+    name.trim().toLowerCase() == lowerCaseName
 
 createNewContributor = (name) ->
   $.post '/contributors',
