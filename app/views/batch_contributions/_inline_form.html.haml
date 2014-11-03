@@ -1,11 +1,11 @@
 = simple_form_for [@batch, @contribution], remote: true do |f|
   .row
-    .col-md-2
+    .col-md-3
       = render partial: 'shared/contributor_select', locals: { f: f }
-
     .col-md-2
       = f.input :date, as: :string, label: 'Date',
-        input_html: { value: @contribution.date_string,
+        input_html: { placeholder: "mm/dd/yyyy",
+          value: @contribution.date_string,
           class: 'datepicker', id: 'contribution-date' }
     .col-md-2
       = f.input :amount
@@ -14,7 +14,7 @@
         collection: [ 'Check', 'Cash', 'Other' ], selected: 'Check'
     .col-md-2
       = f.input :reference
-    .col-md-2
+    .col-md-1
       .form-group
         %label.control-label &nbsp;
         = f.button :submit, 'Add', :class => 'btn-default form-control'

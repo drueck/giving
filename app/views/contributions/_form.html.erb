@@ -3,7 +3,8 @@
   <%= render partial: 'shared/contributor_select', locals: { f: f } %>
 
   <%= f.input :date, as: :string, label: 'Date',
-    input_html: { value: @contribution.date_string,
+    input_html: { placeholder: "mm/dd/yyyy",
+                  value: @contribution.date_string,
                   class: 'datepicker',
                   id: 'contribution-date' } %>
   <%= f.input :amount %>
