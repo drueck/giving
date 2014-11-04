@@ -8,8 +8,9 @@ class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
   validates :username, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 8 }, if: :password
-  validates_confirmation_of :password, if: :password
+  validates :password, presence: true, on: :create
+  validates :password, length: { minimum: 8 }, if: -> { password.present? }
+  validates_confirmation_of :password, if: -> { password.present? }
   validates :user_type, presence: true
 
   validate :user_type_is_valid
