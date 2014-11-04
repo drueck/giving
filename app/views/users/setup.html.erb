@@ -4,6 +4,6 @@
   <%= f.input :username, input_html: { autofocus: 'autofocus' } %>
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
-  <%= f.input :user_type, as: :hidden, input_html: { value: User::ADMIN_USER_TYPE } %>
+  <%= f.input :user_type, as: :hidden, input_html: { value: User::ADMIN } %>
   <%= f.submit :class => 'btn btn-default' %>
 <% end %>

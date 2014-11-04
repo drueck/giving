@@ -10,7 +10,7 @@ private
   helper_method :current_user_is_admin?
 
   def no_admins?
-    User.where(user_type: User::ADMIN_USER_TYPE).count.zero?
+    User.where(user_type: User::ADMIN).count.zero?
   end
 
   def not_authenticated
