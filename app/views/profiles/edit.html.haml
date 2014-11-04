@@ -1,0 +1,7 @@
+<h1>Edit Profile</h1>
+= simple_form_for @user, url: profile_path do |f|
+  = f.input :username, input_html: { autofocus: true }
+  = f.input :password, label: "New Password"
+  = f.input :password_confirmation, label: "Confirm Password"
+  = f.submit "Update", class: "btn btn-default"
+  = link_to "Cancel", root_path, class: "btn btn-default"

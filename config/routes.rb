@@ -16,6 +16,8 @@ Giving::Application.routes.draw do
   get 'login' => 'sessions#new', :as => 'login'
   get 'logout' => 'sessions#destroy', :as => 'logout'
 
+  resource :profile, only: [:edit, :update]
+
   resources :statements, only: [:new, :create]
 
 end
