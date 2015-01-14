@@ -39,5 +39,6 @@ gem 'prawn', '~> 1.3.0'
 gem 'prawn-table', '~> 0.2.0'
 gem 'money-rails', '~> 0.12.0'
 gem 'draper', '~> 1.4.0'
+gem 'rubyzip', '~> 1.1.0'
 
 gem 'rails_12factor', '~> 0.0.3', group: :production
