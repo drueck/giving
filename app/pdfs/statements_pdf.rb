@@ -121,7 +121,7 @@ class StatementsPdf < Prawn::Document
 
   def get_total_row(statement)
     total_contributions = number_to_currency(statement.total_contributions)
-    total_row = [ { content: 'Total', colspan: 4 }, total_contributions ]
+    total_row = [ { content: 'Total', colspan: 3 }, total_contributions ]
     total_row
   end
 
@@ -136,7 +136,7 @@ class StatementsPdf < Prawn::Document
       table.column(0).padding_left = 0
       table.column(-1).padding_right = 0
       table.cells.border_width = 0
-      table.column(4).align = :right
+      table.column(-1).align = :right
       table.row(0).font_style = :bold
       table.row(0).borders = [:bottom]
       table.row(0).border_width = 1
@@ -166,16 +166,14 @@ class StatementsPdf < Prawn::Document
   end
 
   def contributions_table_headings
-    [ 'Contributor',
-      'Date Recorded',
+    [ 'Date Recorded',
       'Type',
       'Reference',
       'Amount' ]
   end
 
   def contribution_to_array(contribution)
-    [ contribution.contributor.name,
-      contribution.date_string,
+    [ contribution.date_string,
       contribution.payment_type,
       contribution.reference,
       number_to_currency(contribution.amount) ]
