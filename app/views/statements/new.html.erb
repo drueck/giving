@@ -1,7 +1,7 @@
 <h1>Statements</h1>
 <%= form_tag statements_path do %>
   <div class="form-group">
-    <label class="control-label">Year</label>
+    <label class="control-label" for="year">Year</label>
     <select name="year" class="form-control">
       <%= @years.each do |year| %>
         <option value="<%= year %>"><%= year %></option>
@@ -9,7 +9,14 @@
     </select>
   </div>
   <div class="form-group">
-    <label class="control-label">Message to Contributors</label>
+    <label class="control-label" for="output_type">Output Type</label>
+    <select name="output_type" class="form-control">
+      <option value="one">One PDF for All Contriubtors (Best for Printing)</option>
+      <option value="many">Separate PDFs for Each Contributor (Best for Emailing)</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="message">Message to Contributors</label>
     <textarea name="message" class="form-control"></textarea>
   </div>
   <div class="form-group">
