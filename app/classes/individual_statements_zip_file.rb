@@ -37,8 +37,8 @@ class IndividualStatementsZipFile
   def pretty_filename(statement)
     statement.contributor.name.downcase
       .gsub("&", "and")
-      .gsub(/\W+/, "")
-      .gsub(/\s+/, "-") + ".pdf"
+      .gsub(/\s+/, "-")
+      .gsub(/[^\w-]/, "") + ".pdf"
   end
 
   def statement_file(statement)
